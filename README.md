@@ -15,7 +15,7 @@ Welcome to Bibliohub, where the world of literature meets the innovation of coll
 - [ ] cel putin 2 colectii diferite capabile sa gestioneze obiectele definite anterior 
     (eg: List, Set, Map etc.) dintre care cel putin una sa fie sortata; se vor folosi array-uri uni-/bidimensionale in cazul in care nu se parcurg colectiile 
     pana la data checkpoint-ului.
-- [ ] utilizare mostenire pentru crearea de clase aditionale si utilizarea lor 
+- [x] utilizare mostenire pentru crearea de clase aditionale si utilizarea lor 
     in cadrul colectiilor
 - [ ] cel putin o clasa serviciu care sa expuna operatiile sistemului
 - [ ] o clasa Main din care sunt facute apeluri catre servicii
@@ -25,8 +25,8 @@ Welcome to Bibliohub, where the world of literature meets the innovation of coll
 <details>
     <summary>2nd Stage</summary>
 
-- Extindeti proiectul din prima etapa prin realizarea persistentei utilizant o bada de date relationala si JDBC
-  - [ ] sa se realizeze servicii cafe sa expuna operatii CRUD pentru cel putin 4 clase
+- Extindeti proiectul din prima etapa prin realizarea persistentei utilizant o baza de date relationala si JDBC
+  - [ ] sa se realizeze servicii care sa expuna operatii CRUD pentru cel putin 4 clase
   - [ ] se vor realiza servicii singleton generice pentru scrierea si citirea din baza de date
 - Realizarea unui serviciu de audit
   - [ ] se va realiza un serviciu care scrie intr-un fisier de tip CSV de fiecare data cand este executata una dintre actiunile descrise in prima etapa. Structura fisierului: nume_actiune, timestamp
@@ -38,8 +38,8 @@ Welcome to Bibliohub, where the world of literature meets the innovation of coll
 2. User
 3. Company
 4. Shelf
-5. LendedBooks
-6. Bestsellers (extends Books)
+5. Wishlist
+6. Library
 7. PhysicalBook (extends Books)
 8. EBook (extends Books)
 
@@ -49,13 +49,13 @@ Welcome to Bibliohub, where the world of literature meets the innovation of coll
 1. Search for books by title
 2. Borrow a book for a period of time
 3. Return a book early
-4. View lended books
+4. View wishlisted books
 5. Add books to my shelf
 6. View books in my shelf
-7. Search for bestseller books only
+7. Search for available books
 #### Librarian password only
 8. Add, delete users
-9. Add, delete new books
-10. Add, delete, edit new shelves
+9. Add, delete books
+10. Add, delete, edit companies
 
 
