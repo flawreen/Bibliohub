@@ -11,7 +11,7 @@ Welcome to Bibliohub, where the world of literature meets the innovation of coll
     
 - [x] sa se creeze o lista pe baza temei alese cu cel putin 10 actiuni/interogari care 
     se pot face in cadrul sistemului si o lista cu cel putin 8 tipuri de obiecte.
-- [x] clase simple cu atribute private / protected si metode de acces
+- [ ] clase simple cu atribute private / protected si metode de acces
 - [ ] cel putin 2 colectii diferite capabile sa gestioneze obiectele definite anterior 
     (eg: List, Set, Map etc.) dintre care cel putin una sa fie sortata; se vor folosi array-uri uni-/bidimensionale in cazul in care nu se parcurg colectiile 
     pana la data checkpoint-ului.
@@ -31,6 +31,8 @@ Welcome to Bibliohub, where the world of literature meets the innovation of coll
 - Realizarea unui serviciu de audit
   - [ ] se va realiza un serviciu care scrie intr-un fisier de tip CSV de fiecare data cand este executata una dintre actiunile descrise in prima etapa. Structura fisierului: nume_actiune, timestamp
 </details>
+
+### See task management in the Issues tab
 
 ### Classes
 
