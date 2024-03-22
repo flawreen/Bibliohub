@@ -42,8 +42,8 @@ Welcome to Bibliohub, where the world of literature meets the innovation of coll
 4. Shelf
 5. Wishlist
 6. Library
-7. PhysicalBook (extends Books)
-8. EBook (extends Books)
+7. PhysicalBook (extends Book)
+8. EBook (extends Book)
 
 
 ### Actions
