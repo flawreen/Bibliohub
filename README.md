@@ -32,10 +32,11 @@ Welcome to Bibliohub, where the world of literature meets the innovation of coll
   - [ ] se va realiza un serviciu care scrie intr-un fisier de tip CSV de fiecare data cand este executata una dintre actiunile descrise in prima etapa. Structura fisierului: nume_actiune, timestamp
 </details>
 
+
 ### See task management in the Issues tab
 
-### Classes
 
+### Classes
 1. Book (abstract)
 2. User
 3. Company
@@ -60,4 +61,6 @@ Welcome to Bibliohub, where the world of literature meets the innovation of coll
 9. Add, delete books
 10. Add, delete, edit companies
 
-
+### Extra
+1. SeedData file
+2. Unit tests for each action

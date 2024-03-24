@@ -10,7 +10,7 @@ public class EBook extends Book {
     }
 
     public void setFormat(String format) {
-        if (!format.equals("pdf") || !format.equals("epub")) return;
+        if (!format.equals("pdf") && !format.equals("epub")) return;
         this.format = format;
     }
 

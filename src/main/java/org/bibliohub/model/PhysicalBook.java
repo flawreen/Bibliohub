@@ -10,7 +10,7 @@ public class PhysicalBook extends Book {
     }
 
     public void setCoverType(String coverType) {
-        if (!coverType.equals("hardcover") || !coverType.equals("paperback")) return;
+        if (!coverType.equals("hardcover") && !coverType.equals("paperback")) return;
         this.coverType = coverType;
     }
 
