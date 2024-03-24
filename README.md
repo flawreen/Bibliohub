@@ -50,8 +50,8 @@ Welcome to Bibliohub, where the world of literature meets the innovation of coll
 ### Actions
 #### User accessible
 1. Search for books by title
-2. Borrow a book for a period of time
-3. Return a book early
+2. Borrow a book
+3. Return a book
 4. View wishlisted books
 5. Add books to my shelf
 6. View books in my shelf

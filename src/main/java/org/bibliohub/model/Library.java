@@ -18,13 +18,6 @@ public class Library {
         return instance;
     }
 
-    public void addBook(Book newBook) {
-        for (Book book : availableBooks) {
-            if (book == newBook) return;
-        }
-        availableBooks.add(newBook);
-    }
-
     public long getId() {
         return id;
     }
