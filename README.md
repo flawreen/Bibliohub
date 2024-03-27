@@ -58,7 +58,7 @@ Welcome to Bibliohub, where the world of literature meets the innovation of coll
 2. Borrow a book
 3. Return a book
 4. View wishlisted books
-5. Add books to my shelf
+5. Add books to my wishlist
 6. View books in my shelf
 7. Search for available books
 #### Librarian password only

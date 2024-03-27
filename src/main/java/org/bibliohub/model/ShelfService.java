@@ -7,7 +7,7 @@ public class ShelfService {
     private static ShelfService instance;
 
     private ShelfService() {
-        this.shelves = new ArrayList<Shelf>();
+        this.shelves = new ArrayList<>();
     }
 
     public static ShelfService getInstance() {
@@ -28,6 +28,14 @@ public class ShelfService {
     public void addToShelf(long id, Book book) {
         try {
             getShelfById(id).getBookList().add(book);
+        } catch (NullPointerException e) {
+            System.out.println("Shelf with id " + id + " not found.");
+        }
+    }
+
+    public void removeFromShelf(long id, Book book) {
+        try {
+            getShelfById((int) id).getBookList().remove(book);
         } catch (NullPointerException e) {
             System.out.println("Shelf with id " + id + " not found.");
         }
