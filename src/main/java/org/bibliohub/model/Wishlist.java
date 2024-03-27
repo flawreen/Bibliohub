@@ -41,4 +41,18 @@ public class Wishlist {
         this.id = id;
         this.userId = userId;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < wishlistBooks.size(); ++i) {
+            res.append(wishlistBooks.get(i).toString());
+            if (i > 0 && i % 2 == 0) {
+                res.append("\n");
+            } else {
+                res.append("\t");
+            }
+        }
+        return res.toString();
+    }
 }

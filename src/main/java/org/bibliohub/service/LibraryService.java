@@ -41,7 +41,7 @@ public class LibraryService {
         try {
             libraryInstance.getAvailableBooks().remove(libraryInstance.getAvailableBooks().get((int) id));
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Id " + id + " not found.");
+            System.out.println("Book with id " + id + " not found.");
         }
     }
 

@@ -10,27 +10,27 @@ public class User {
 
     private long shelfId;
     
-    private ArrayList<Wishlist> wishlist;
+    private long wishlistId;
 
     private Company company;
 
     public User() {
     }
 
-    public ArrayList<Wishlist> getWishlist() {
-        return wishlist;
+    public long getWishlistId() {
+        return wishlistId;
     }
 
-    public void setWishlist(ArrayList<Wishlist> wishlist) {
-        this.wishlist = wishlist;
+    public void setWishlistId(long wishlistId) {
+        this.wishlistId = wishlistId;
     }
 
-    public User(long id, String name, long companyId, long shelfId, ArrayList<Wishlist> wishlist, Company company) {
+    public User(long id, String name, long companyId, long shelfId, long wishlistId, Company company) {
         this.id = id;
         this.name = name;
         this.companyId = companyId;
         this.shelfId = shelfId;
-        this.wishlist = wishlist;
+        this.wishlistId = wishlistId;
         this.company = company;
     }
 

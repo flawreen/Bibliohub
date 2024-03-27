@@ -57,14 +57,15 @@ Welcome to Bibliohub, where the world of literature meets the innovation of coll
 1. Search for books by title
 2. Borrow a book
 3. Return a book
-4. View wishlisted books
+4. View wishlisted books  ->when user logs in display "x wishlist books available to borrow"
 5. Add books to my wishlist
-6. View books in my shelf
-7. Search for available books
+6. Remove books from wishlist
+7. View books in my shelf
+8. Search for available books
 #### Librarian password only
-8. Add, delete users
-9. Add, delete books
-10. Add, delete, edit companies
+9. Add, delete users
+10. Add, delete books
+11. Add, delete, edit companies
 
 ### Extra
 1. SeedData file

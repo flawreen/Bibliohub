@@ -7,20 +7,47 @@ public abstract class Book {
     protected String title;
     protected String author;
 
-    private ArrayList<Shelf> shelves;
+    protected String isbn;
 
-    private ArrayList<Wishlist> wishlists;
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    protected ArrayList<Shelf> shelves;
+
+    protected ArrayList<Wishlist> wishlists;
 
     public Book() {
 
     }
 
-    public Book(long id, String title, String author, ArrayList<Shelf> shelves, ArrayList<Wishlist> wishlists) {
+    public Book(long id, String title, String author, String isbn, ArrayList<Shelf> shelves, ArrayList<Wishlist> wishlists) {
         this.id = id;
         this.title = title;
         this.author = author;
+        this.isbn = isbn;
         this.shelves = shelves;
         this.wishlists = wishlists;
+    }
+
+    public Book(long id, String title, String author, ArrayList<Wishlist> wishlists, String isbn) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.wishlists = wishlists;
+    }
+
+    public Book(long id, String title, String author, String isbn, ArrayList<Shelf> shelves) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.shelves = shelves;
     }
 
     public ArrayList<Wishlist> getWishlists() {
@@ -31,11 +58,6 @@ public abstract class Book {
         this.wishlists = wishlists;
     }
 
-    public Book(long id, String title, String author) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-    }
 
     public ArrayList<Shelf> getShelves() {
         return shelves;
@@ -45,12 +67,6 @@ public abstract class Book {
         this.shelves = shelves;
     }
 
-    public Book(long id, String title, String author, ArrayList<Shelf> shelves) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.shelves = shelves;
-    }
 
     public long getId() {
         return id;
@@ -78,13 +94,9 @@ public abstract class Book {
 
     @Override
     public String toString() {
-        return "/----------" + this.id + "---------\\" + "\n" +
-"        " + this.title + "        \n" +
-"|---------------------|\n" +
-"|                     |\n" +
-"      " + this.author + "      \n" +
-"|                     |\n" +
-"|                     |\n" +
-"\\---------------------/\n";
+        return "____________________" + this.id + "______________________" + "\n" +
+                "| Title: " + this.getTitle() + "\n" +
+                "| Author: " + this.getAuthor() + "\n" +
+                "\\___________________________________________/" + "\n";
     }
 }

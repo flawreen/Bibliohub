@@ -1,4 +1,7 @@
-package org.bibliohub.model;
+package org.bibliohub.service;
+
+import org.bibliohub.model.Book;
+import org.bibliohub.model.Shelf;
 
 import java.util.ArrayList;
 
