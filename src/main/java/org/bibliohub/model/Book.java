@@ -25,6 +25,13 @@ public abstract class Book {
 
     }
 
+    public Book(long id, String title, String author, String isbn) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+    }
+
     public Book(long id, String title, String author, String isbn, ArrayList<Shelf> shelves, ArrayList<Wishlist> wishlists) {
         this.id = id;
         this.title = title;

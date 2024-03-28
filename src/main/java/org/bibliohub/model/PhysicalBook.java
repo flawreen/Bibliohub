@@ -14,18 +14,23 @@ public class PhysicalBook extends Book {
         this.coverType = coverType;
     }
 
-    public PhysicalBook(long id, String title, String author, ArrayList<Shelf> shelves, ArrayList<Wishlist> wishlists, String coverType) {
-        super(id, title, author, shelves, wishlists);
+    public PhysicalBook(long id, String title, String author, String isbn, ArrayList<Shelf> shelves, String coverType) {
+        super(id, title, author, isbn, shelves);
         this.coverType = coverType;
     }
 
-    public PhysicalBook(long id, String title, String author, String coverType) {
-        super(id, title, author);
+    public PhysicalBook(long id, String title, String author, ArrayList<Wishlist> wishlists, String isbn, String coverType) {
+        super(id, title, author, wishlists, isbn);
         this.coverType = coverType;
     }
 
-    public PhysicalBook(long id, String title, String author, ArrayList<Shelf> shelves, String coverType) {
-        super(id, title, author, shelves);
+    public PhysicalBook(long id, String title, String author, String isbn, ArrayList<Shelf> shelves, ArrayList<Wishlist> wishlists, String coverType) {
+        super(id, title, author, isbn, shelves, wishlists);
+        this.coverType = coverType;
+    }
+
+    public PhysicalBook(long id, String title, String author, String isbn, String coverType) {
+        super(id, title, author, isbn);
         this.coverType = coverType;
     }
 }

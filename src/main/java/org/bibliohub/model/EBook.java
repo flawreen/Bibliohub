@@ -14,18 +14,23 @@ public class EBook extends Book {
         this.format = format;
     }
 
-    public EBook(long id, String title, String author, ArrayList<Shelf> shelves, ArrayList<Wishlist> wishlists, String format) {
-        super(id, title, author, shelves, wishlists);
+    public EBook(long id, String title, String author, String isbn, String format) {
+        super(id, title, author, isbn);
         this.format = format;
     }
 
-    public EBook(long id, String title, String author, String format) {
-        super(id, title, author);
+    public EBook(long id, String title, String author, String isbn, ArrayList<Shelf> shelves, ArrayList<Wishlist> wishlists, String format) {
+        super(id, title, author, isbn, shelves, wishlists);
         this.format = format;
     }
 
-    public EBook(long id, String title, String author, ArrayList<Shelf> shelves, String format) {
-        super(id, title, author, shelves);
+    public EBook(long id, String title, String author, String isbn, ArrayList<Shelf> shelves, String format) {
+        super(id, title, author, isbn, shelves);
+        this.format = format;
+    }
+
+    public EBook(long id, String title, String author, ArrayList<Wishlist> wishlists, String isbn, String format) {
+        super(id, title, author, wishlists, isbn);
         this.format = format;
     }
 }

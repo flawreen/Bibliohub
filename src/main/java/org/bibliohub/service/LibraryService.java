@@ -30,14 +30,37 @@ public class LibraryService {
         return res;
     }
 
-    public void addBook(Book newBook) {
+    void addBook(Book newBook) {
         for (Book book : libraryInstance.getAvailableBooks()) {
             if (book == newBook) return;
         }
         libraryInstance.getAvailableBooks().add(newBook);
     }
 
-    public void removeBook(long id) {
+    public void addBook(Book newBook, String password) {
+        if (!password.equals("admin")) {
+            System.out.println("Wrong password");
+            return;
+        }
+        for (Book book : libraryInstance.getAvailableBooks()) {
+            if (book == newBook) return;
+        }
+        libraryInstance.getAvailableBooks().add(newBook);
+    }
+
+    void removeBookById(long id) {
+        try {
+            libraryInstance.getAvailableBooks().remove(libraryInstance.getAvailableBooks().get((int) id));
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Book with id " + id + " not found.");
+        }
+    }
+
+    public void removeBookById(long id, String password) {
+        if (!password.equals("admin")) {
+            System.out.println("Wrong password");
+            return;
+        }
         try {
             libraryInstance.getAvailableBooks().remove(libraryInstance.getAvailableBooks().get((int) id));
         } catch (ArrayIndexOutOfBoundsException e) {

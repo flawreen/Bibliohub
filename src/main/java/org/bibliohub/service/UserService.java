@@ -35,7 +35,7 @@ public class UserService {
     */
     public void borrowBook(long userId, long bookId) {
         try {
-            libraryService.removeBook(bookId);
+            libraryService.removeBookById(bookId);
             shelfService.addToShelf(getUserById(userId).getShelfId(), bookService.getBookById(bookId));
         } catch (NullPointerException e) {
             System.out.println("Error borrowing book with id " + bookId);

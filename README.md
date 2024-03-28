@@ -64,8 +64,9 @@ Welcome to Bibliohub, where the world of literature meets the innovation of coll
 8. Search available books by title
 #### Librarian password only
 9. Add, delete users
-10. Add, delete books
+10. Add, delete, edit books
 11. Add, delete, edit companies
+12. Add, delete books from library
 
 ### Extra
 1. SeedData file
