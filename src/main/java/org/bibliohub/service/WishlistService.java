@@ -51,7 +51,7 @@ public class WishlistService {
         }
     }
 
-    public String viewBooks(long id) {
+    public String viewWishlist(long id) {
         try {
             return getWishlistById(id).toString();
         } catch (NullPointerException e) {

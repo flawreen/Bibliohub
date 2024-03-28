@@ -61,7 +61,7 @@ Welcome to Bibliohub, where the world of literature meets the innovation of coll
 5. Add books to my wishlist
 6. Remove books from wishlist
 7. View books in my shelf
-8. Search for available books
+8. Search available books by title
 #### Librarian password only
 9. Add, delete users
 10. Add, delete books
