@@ -49,4 +49,14 @@ public class LibraryService {
         libraryInstance.setAvailableBooks(books);
     }
 
+    public ArrayList<Book> searchBookByTitle(String title) {
+        ArrayList<Book> searchResults = new ArrayList<>();
+        for (var book : libraryInstance.getAvailableBooks()) {
+            if (book.getTitle().indexOf(title) != -1) {
+                searchResults.add(book);
+            }
+        }
+        return searchResults;
+    }
+
 }
