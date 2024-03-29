@@ -49,12 +49,4 @@ public class ShelfService {
         }
     }
 
-    public String viewShelf(long id) {
-        try {
-            return getShelfById(id).toString();
-        } catch (NullPointerException e) {
-            System.out.println("Wishlist with id " + id + " not found");
-            return "";
-        }
-    }
 }

@@ -56,12 +56,5 @@ public class WishlistService {
         }
     }
 
-    public String viewWishlist(long id) {
-        try {
-            return getWishlistById(id).toString();
-        } catch (NullPointerException e) {
-            System.out.println("Wishlist with id " + id + " not found");
-            return "";
-        }
-    }
+
 }

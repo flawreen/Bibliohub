@@ -102,5 +102,29 @@ public class UserService {
         }
     }
 
+    public void viewWishlist(long wishlistId) {
+        try {
+            var wishlist = wishlistService.getWishlistById(wishlistId).getWishlistBooks();
+            var availableBooks = 0;
+            for (var book : wishlist) {
+                if (libraryService.getAvailableBooks().indexOf(book) != -1) {
+                    availableBooks++;
+                }
+            }
+            System.out.println(wishlist.toString());
+            System.out.printf("%d books available to borrow", availableBooks);
+        } catch (NullPointerException e) {
+            System.out.println("Wishlist with id " + wishlistId + " not found");
+        }
+    }
+
+    public void viewShelf(long shelfId) {
+        try {
+            System.out.println(shelfService.getShelfById(shelfId).toString());
+        } catch (NullPointerException e) {
+            System.out.println("Shelf with id " + shelfId + " not found");
+        }
+    }
+
 
 }

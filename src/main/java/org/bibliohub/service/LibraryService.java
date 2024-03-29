@@ -20,9 +20,13 @@ public class LibraryService {
         return instance;
     }
 
+    public ArrayList<Book> getAvailableBooks() {
+        return libraryInstance.getAvailableBooks();
+    }
+
     public ArrayList<Book> searchBooksByTitle(String title) {
         ArrayList<Book> res = new ArrayList<Book>();
-        for (var book : libraryInstance.getAvailableBooks()) {
+        for (var book : getAvailableBooks()) {
             if (book.getTitle().indexOf(title) != -1) {
                 res.add(book);
             }
@@ -34,10 +38,10 @@ public class LibraryService {
         if (newBook == null) {
             return;
         }
-        for (Book book : libraryInstance.getAvailableBooks()) {
+        for (Book book : getAvailableBooks()) {
             if (book == newBook) return;
         }
-        libraryInstance.getAvailableBooks().add(newBook);
+        getAvailableBooks().add(newBook);
     }
 
     public void addBook(Book newBook, String password) {
@@ -45,15 +49,15 @@ public class LibraryService {
             System.out.println("Wrong password");
             return;
         }
-        for (Book book : libraryInstance.getAvailableBooks()) {
+        for (Book book : getAvailableBooks()) {
             if (book == newBook) return;
         }
-        libraryInstance.getAvailableBooks().add(newBook);
+        getAvailableBooks().add(newBook);
     }
 
     void removeBookById(long id) {
         try {
-            libraryInstance.getAvailableBooks().remove(libraryInstance.getAvailableBooks().get((int) id));
+            getAvailableBooks().remove(getAvailableBooks().get((int) id));
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Book with id " + id + " not found.");
         }
@@ -65,7 +69,7 @@ public class LibraryService {
             return;
         }
         try {
-            libraryInstance.getAvailableBooks().remove(libraryInstance.getAvailableBooks().get((int) id));
+            getAvailableBooks().remove(getAvailableBooks().get((int) id));
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Book with id " + id + " not found.");
         }
@@ -77,7 +81,7 @@ public class LibraryService {
 
     public ArrayList<Book> searchBookByTitle(String title) {
         ArrayList<Book> searchResults = new ArrayList<>();
-        for (var book : libraryInstance.getAvailableBooks()) {
+        for (var book : getAvailableBooks()) {
             if (book.getTitle().indexOf(title) != -1) {
                 searchResults.add(book);
             }

@@ -54,20 +54,22 @@ Welcome to Bibliohub, where the world of literature meets the innovation of coll
 
 ### Actions
 #### User accessible
-1. Search for books by title
-2. Borrow a book
-3. Return a book
-4. View wishlisted books  ->when user logs in display "x wishlist books available to borrow"
-5. Add books to my wishlist
-6. Remove books from wishlist
-7. View books in my shelf
-8. Search available books by title
+1. Borrow a book
+2. Return a book
+3. View wishlisted books  ->when user logs in display "x wishlist books available to borrow"
+4. Add books to my wishlist
+5. Remove books from wishlist
+6. View books in my shelf
+7. Search available books by title
 #### Librarian password only
-9. Add, delete users
-10. Add, delete books
-11. Add, delete companies
-12. Add, delete books from library
+8. Add, delete users
+9. Add, delete books
+10. Add, delete companies
+11. Add, delete books from library
 
 ### Extra
 1. SeedData file
 2. Unit tests for each action
+3. Factory pattern for Book class
+4. Command pattern for menu actions
+5. Singleton pattern for services
