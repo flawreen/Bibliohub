@@ -66,6 +66,7 @@ Welcome to Bibliohub, where the world of literature meets the innovation of coll
 9. Add, delete books
 10. Add, delete companies
 11. Add, delete books from library
+12. Make books available in library
 
 ### Extra
 1. SeedData file

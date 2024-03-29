@@ -31,12 +31,15 @@ public class BookService implements BookFactory {
         }
     }
 
-    public void addBook() {
+    public Book addBook(String password) {
+        if (!password.equals("admin")) return null;
         try {
             Book newBook = BookFactory.createBook();
             books.add(newBook);
+            return newBook;
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            return null;
         }
     }
 
@@ -45,7 +48,7 @@ public class BookService implements BookFactory {
         libraryService.addBook(getBookById(id));
     }
 
-    void deleteBookById(long id, String password) {
+    public void deleteBookById(long id, String password) {
         if (!password.equals("admin")) {
             return;
         }

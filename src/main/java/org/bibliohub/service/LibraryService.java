@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class LibraryService {
     private static final Library libraryInstance = Library.getInstance();
+    private static final BookService bookService = BookService.getInstance();
     private static LibraryService instance;
 
     private LibraryService() {
@@ -44,13 +45,15 @@ public class LibraryService {
         getAvailableBooks().add(newBook);
     }
 
-    public void addBook(Book newBook, String password) {
+    public void addBook(String password) {
         if (!password.equals("admin")) {
             System.out.println("Wrong password");
             return;
         }
-        for (Book book : getAvailableBooks()) {
-            if (book == newBook) return;
+        Book newBook = bookService.addBook(password);
+        if (newBook == null) {
+            System.out.println("Error adding book to library");
+            return;
         }
         getAvailableBooks().add(newBook);
     }
@@ -79,14 +82,5 @@ public class LibraryService {
         libraryInstance.setAvailableBooks(books);
     }
 
-    public ArrayList<Book> searchBookByTitle(String title) {
-        ArrayList<Book> searchResults = new ArrayList<>();
-        for (var book : getAvailableBooks()) {
-            if (book.getTitle().indexOf(title) != -1) {
-                searchResults.add(book);
-            }
-        }
-        return searchResults;
-    }
 
 }

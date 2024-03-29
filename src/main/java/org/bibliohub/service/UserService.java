@@ -1,5 +1,6 @@
 package org.bibliohub.service;
 
+import org.bibliohub.model.Book;
 import org.bibliohub.model.Company;
 import org.bibliohub.model.User;
 import java.util.ArrayList;
@@ -34,8 +35,10 @@ public class UserService {
         }
     }
 
-    public void deleteUser(long id, String password) {
+    public void deleteUser(String password) {
         if (!password.equals("admin")) return;
+        Scanner read = new Scanner(System.in);
+        long id = read.nextLong();
         try {
             users.remove(getUserById(id));
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -43,7 +46,7 @@ public class UserService {
         }
     }
 
-    public void addUser(String password) throws Exception {
+    public void addUser(String password) {
         if (!password.equals("admin")) return;
         Scanner read = new Scanner(System.in);
         long id = users.size();
@@ -126,5 +129,24 @@ public class UserService {
         }
     }
 
+    private void printBooks(ArrayList<Book> books) {
+        for (int i = 0; i < books.size(); ++i) {
+            System.out.print(books.get(i).toString());
+            if (i > 0 && i % 2 == 0) {
+                System.out.println();
+            } else {
+                System.out.print("\t");
+            }
+        }
+    }
 
+    public void searchBookByTitle(String title) {
+        var res = libraryService.searchBooksByTitle(title);
+        if (res == null) {
+            System.out.println("No books found");
+            return;
+        }
+        System.out.printf("%d books found", res.size());
+        printBooks(res);
+    }
 }

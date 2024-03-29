@@ -1,4 +1,4 @@
-package org.bibliohub.command;
+package org.bibliohub.command.user;
 
 
 import org.bibliohub.model.User;
