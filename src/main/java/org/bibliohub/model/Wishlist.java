@@ -40,6 +40,7 @@ public class Wishlist {
     public Wishlist(long id, long userId) {
         this.id = id;
         this.userId = userId;
+        this.wishlistBooks = new ArrayList<>();
     }
 
     @Override

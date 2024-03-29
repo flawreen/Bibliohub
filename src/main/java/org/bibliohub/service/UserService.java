@@ -1,7 +1,9 @@
 package org.bibliohub.service;
 
+import org.bibliohub.model.Company;
 import org.bibliohub.model.User;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class UserService {
     private ArrayList<User> users;
@@ -9,6 +11,8 @@ public class UserService {
     private static final ShelfService shelfService = ShelfService.getInstance();
     private static final WishlistService wishlistService = WishlistService.getInstance();
     private static final BookService bookService = BookService.getInstance();
+
+    private static final CompanyService companyService = CompanyService.getInstance();
     private static UserService instance;
 
     private UserService() {
@@ -27,6 +31,37 @@ public class UserService {
             return users.get((int) id);
         } catch (ArrayIndexOutOfBoundsException e) {
             return null;
+        }
+    }
+
+    public void deleteUser(long id, String password) {
+        if (!password.equals("admin")) return;
+        try {
+            users.remove(getUserById(id));
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("User with id " + id + " not found.");
+        }
+    }
+
+    public void addUser(String password) throws Exception {
+        if (!password.equals("admin")) return;
+        Scanner read = new Scanner(System.in);
+        long id = users.size();
+        System.out.print("\nName: ");
+        String name = read.next();
+        System.out.print("\nCompany Id: ");
+        long companyId = read.nextLong();
+        try {
+            users.add(new User(
+                    id,
+                    name,
+                    companyId,
+                    shelfService.addShelf(id),
+                    wishlistService.addWishlist(id),
+                    companyService.getCompanyById(companyId)
+            ));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 

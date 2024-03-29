@@ -12,6 +12,7 @@ public class Shelf {
     public Shelf(long id, long userId) {
         this.id = id;
         this.userId = userId;
+        this.bookList = new ArrayList<>();
     }
 
     public Shelf(long id, long userId, ArrayList<Book> bookList) {

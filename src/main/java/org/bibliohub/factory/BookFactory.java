@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public interface BookFactory {
 
-    static Book createBook() {
+    static Book createBook() throws Exception {
         Scanner read = new Scanner(System.in);
         System.out.print("Id: ");
         long id = read.nextLong();
@@ -28,10 +28,7 @@ public interface BookFactory {
 
             if (option == 1) format.append("pdf");
             else if (option == 2) format.append("epub");
-            else {
-                System.out.println("Failed to create book");
-                return null;
-            }
+            else throw new Exception("Failed to create book");
 
             return new EBook(id, title, author, isbn, format.toString());
 
@@ -42,16 +39,12 @@ public interface BookFactory {
 
             if (option == 1) cover.append("hardcover");
             else if (option == 2) cover.append("paperback");
-            else {
-                System.out.println("Failed to create book");
-                return null;
-            }
+            else throw new Exception("Failed to create book");
 
             return new PhysicalBook(id, title, author, isbn, cover.toString());
 
         }
 
-        System.out.println("Failed to create book");
-        return null;
+        throw new Exception("Failed to create book");
     }
 }

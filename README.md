@@ -65,7 +65,7 @@ Welcome to Bibliohub, where the world of literature meets the innovation of coll
 #### Librarian password only
 9. Add, delete users
 10. Add, delete books
-11. Add, delete, edit companies
+11. Add, delete companies
 12. Add, delete books from library
 
 ### Extra

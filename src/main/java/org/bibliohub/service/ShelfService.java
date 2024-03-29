@@ -20,6 +20,11 @@ public class ShelfService {
         return instance;
     }
 
+    public int addShelf(long userId) {
+        shelves.add(new Shelf(shelves.size(), userId));
+        return shelves.size()-1;
+    }
+
     public Shelf getShelfById(long id) {
         try {
             return shelves.get((int) id);

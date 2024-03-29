@@ -21,6 +21,11 @@ public class WishlistService {
         return instance;
     }
 
+    public int addWishlist(long userId) {
+        wishlists.add(new Wishlist(wishlists.size(), userId));
+        return wishlists.size()-1;
+    }
+
     public Wishlist getWishlistById(long id) {
         try {
             return wishlists.get((int) id);

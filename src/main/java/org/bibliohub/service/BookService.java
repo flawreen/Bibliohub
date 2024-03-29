@@ -32,8 +32,12 @@ public class BookService implements BookFactory {
     }
 
     public void addBook() {
-        Book newBook = BookFactory.createBook();
-        if (newBook != null) books.add(newBook);
+        try {
+            Book newBook = BookFactory.createBook();
+            books.add(newBook);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void makeBookAvailable(long id, String password) {

@@ -5,12 +5,15 @@ import java.util.ArrayList;
 public class Company {
     private long id;
     private String name;
+    private long cui;
 
     private ArrayList<User> employees;
 
-    public Company(long id, String name) {
+
+    public Company(long id, String name, long cui) {
         this.id = id;
         this.name = name;
+        this.cui = cui;
         this.employees = new ArrayList<User>();
     }
 
@@ -18,6 +21,14 @@ public class Company {
         this.id = id;
         this.name = name;
         this.employees = employees;
+    }
+
+    public long getCui() {
+        return cui;
+    }
+
+    public void setCui(long cui) {
+        this.cui = cui;
     }
 
     public long getId() {
