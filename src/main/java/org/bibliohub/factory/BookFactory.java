@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public interface BookFactory {
 
-    static Book createBook(String type) {
+    static Book createBook() {
         Scanner read = new Scanner(System.in);
         System.out.print("Id: ");
         long id = read.nextLong();
@@ -18,6 +18,8 @@ public interface BookFactory {
         String author = read.next();
         System.out.print("\nISBN: ");
         String isbn = read.next();
+        System.out.println("Type:\n1)Physical Book\n2)EBook");
+        String type = read.next();
 
         if (type.equals("EBook")) {
             System.out.println("EBook format:\n1) pdf\n2) epub");

@@ -31,6 +31,9 @@ public class LibraryService {
     }
 
     void addBook(Book newBook) {
+        if (newBook == null) {
+            return;
+        }
         for (Book book : libraryInstance.getAvailableBooks()) {
             if (book == newBook) return;
         }

@@ -1,11 +1,12 @@
 package org.bibliohub.service;
 
+import org.bibliohub.factory.BookFactory;
 import org.bibliohub.model.Book;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class BookService {
+public class BookService implements BookFactory {
     private ArrayList<Book> books;
 
     private static BookService instance;
@@ -30,6 +31,15 @@ public class BookService {
         }
     }
 
+    public void addBook() {
+        Book newBook = BookFactory.createBook();
+        if (newBook != null) books.add(newBook);
+    }
+
+    public void makeBookAvailable(long id, String password) {
+        if (!password.equals("admin")) return;
+        libraryService.addBook(getBookById(id));
+    }
 
     void deleteBookById(long id, String password) {
         if (!password.equals("admin")) {
