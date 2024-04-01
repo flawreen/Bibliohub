@@ -129,6 +129,12 @@ public class UserService {
         }
     }
 
+    public void viewAvailableBooks() {
+        try {
+            System.out.println(libraryService.printAvailableBooks());
+        } catch (NullPointerException e) {}
+    }
+
     private void printBooks(ArrayList<Book> books) {
         for (int i = 0; i < books.size(); ++i) {
             System.out.print(books.get(i).toString());

@@ -61,12 +61,13 @@ Welcome to Bibliohub, where the world of literature meets the innovation of coll
 5. Remove books from wishlist
 6. View books in my shelf
 7. Search available books by title
+8. View available books
 #### Librarian password only
-8. Add, delete users
-9. Add, delete books
-10. Add, delete companies
-11. Add, delete books from library
-12. Make books available in library
+1. Add, delete users
+2. Add, delete books
+3. Add, delete companies
+4. Add, delete books from library
+5. Make books available in library
 
 ### Extra
 1. SeedData file

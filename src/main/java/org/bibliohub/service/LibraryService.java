@@ -1,11 +1,12 @@
 package org.bibliohub.service;
 
+import org.bibliohub.interfaces.PrintBookArray;
 import org.bibliohub.model.Book;
 import org.bibliohub.model.Library;
 
 import java.util.ArrayList;
 
-public class LibraryService {
+public class LibraryService implements PrintBookArray {
     private static final Library libraryInstance = Library.getInstance();
     private static final BookService bookService = BookService.getInstance();
     private static LibraryService instance;
@@ -23,6 +24,10 @@ public class LibraryService {
 
     public ArrayList<Book> getAvailableBooks() {
         return libraryInstance.getAvailableBooks();
+    }
+
+    public String printAvailableBooks() {
+        return PrintBookArray.printBooks(getAvailableBooks());
     }
 
     public ArrayList<Book> searchBooksByTitle(String title) {

@@ -1,8 +1,10 @@
 package org.bibliohub.model;
 
+import org.bibliohub.interfaces.PrintBookArray;
+
 import java.util.ArrayList;
 
-public class Wishlist {
+public class Wishlist implements PrintBookArray {
     private long id;
     private long userId;
     private ArrayList<Book> wishlistBooks;
@@ -45,15 +47,6 @@ public class Wishlist {
 
     @Override
     public String toString() {
-        StringBuilder res = new StringBuilder();
-        for (int i = 0; i < wishlistBooks.size(); ++i) {
-            res.append(wishlistBooks.get(i).toString());
-            if (i > 0 && i % 2 == 0) {
-                res.append("\n");
-            } else {
-                res.append("\t");
-            }
-        }
-        return res.toString();
+        return PrintBookArray.printBooks(getWishlistBooks());
     }
 }
