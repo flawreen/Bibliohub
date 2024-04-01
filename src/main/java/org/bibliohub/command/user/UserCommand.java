@@ -1,9 +1,10 @@
 package org.bibliohub.command.user;
 
+import org.bibliohub.interfaces.Command;
 import org.bibliohub.model.User;
 import org.bibliohub.service.UserService;
 
-public abstract class UserCommand {
+public abstract class UserCommand implements Command {
     protected User user;
     protected static final UserService userService = UserService.getInstance();
 
@@ -17,7 +18,4 @@ public abstract class UserCommand {
 
     public abstract void execute();
 
-    public abstract void execute(long bookId);
-
-    public void execute(String param) {};
 }

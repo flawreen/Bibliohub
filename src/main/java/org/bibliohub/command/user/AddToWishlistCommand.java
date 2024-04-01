@@ -3,18 +3,14 @@ package org.bibliohub.command.user;
 import org.bibliohub.model.User;
 
 public class AddToWishlistCommand extends UserCommand {
-
-    public AddToWishlistCommand(User user) {
+    private long bookId;
+    public AddToWishlistCommand(User user, long bookId) {
         super(user);
+        this.bookId = bookId;
     }
 
     @Override
     public void execute() {
-
-    }
-
-    @Override
-    public void execute(long bookId) {
         userService.addToWishlist(user.getId(), bookId);
     }
 }

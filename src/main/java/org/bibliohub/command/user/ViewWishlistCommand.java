@@ -13,8 +13,4 @@ public class ViewWishlistCommand extends UserCommand {
         userService.viewWishlist(user.getWishlistId());
     }
 
-    @Override
-    public void execute(long bookId) {
-
-    }
 }

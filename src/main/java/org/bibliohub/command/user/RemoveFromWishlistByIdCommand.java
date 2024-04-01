@@ -3,18 +3,14 @@ package org.bibliohub.command.user;
 import org.bibliohub.model.User;
 
 public class RemoveFromWishlistByIdCommand extends UserCommand {
-    public RemoveFromWishlistByIdCommand(User user) {
+    private long bookId;
+    public RemoveFromWishlistByIdCommand(User user, long bookId) {
         super(user);
+        this.bookId = bookId;
     }
 
     @Override
     public void execute() {
-
-    }
-
-    @Override
-    public void execute(long bookId) {
         userService.removeFromWishlist(user.getId(), bookId);
     }
-
 }

@@ -1,21 +1,13 @@
 package org.bibliohub.command.user;
 
 public class AddUserCommand extends UserCommand {
-    public AddUserCommand() {
+    private String password;
+    public AddUserCommand(String password) {
+        this.password = password;
     }
 
     @Override
     public void execute() {
-
-    }
-
-    @Override
-    public void execute(long bookId) {
-
-    }
-
-    @Override
-    public void execute(String password) {
         userService.addUser(password);
     }
 }

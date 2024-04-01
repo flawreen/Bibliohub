@@ -12,8 +12,4 @@ public class ViewShelfCommand extends UserCommand {
         userService.viewShelf(user.getShelfId());
     }
 
-    @Override
-    public void execute(long bookId) {
-
-    }
 }

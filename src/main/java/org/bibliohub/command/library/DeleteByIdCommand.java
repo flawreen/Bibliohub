@@ -1,16 +1,17 @@
 package org.bibliohub.command.library;
 
 public class DeleteByIdCommand extends LibraryCommand {
-    public DeleteByIdCommand() {
+    private String password;
+    private long id;
+
+    public DeleteByIdCommand(String password, long id) {
+        this.password = password;
+        this.id = id;
     }
 
     @Override
-    public void execute(String password) {
-
-    }
-
-    @Override
-    public void execute(String password, long id) {
+    public void execute() {
         libraryService.removeBookById(id, password);
     }
+
 }

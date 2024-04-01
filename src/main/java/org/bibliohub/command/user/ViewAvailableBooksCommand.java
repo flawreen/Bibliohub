@@ -10,8 +10,4 @@ public class ViewAvailableBooksCommand extends UserCommand {
         userService.viewAvailableBooks();
     }
 
-    @Override
-    public void execute(long bookId) {
-
-    }
 }

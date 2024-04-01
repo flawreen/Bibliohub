@@ -1,14 +1,14 @@
 package org.bibliohub.command.company;
 
+import org.bibliohub.interfaces.Command;
 import org.bibliohub.service.CompanyService;
 
-public abstract class CompanyCommand {
+public abstract class CompanyCommand implements Command {
     protected static final CompanyService companyService = CompanyService.getInstance();
 
     CompanyCommand() {
 
     }
 
-    public abstract void execute(String password);
-    public abstract void execute(String password, long id);
+    public abstract void execute();
 }
