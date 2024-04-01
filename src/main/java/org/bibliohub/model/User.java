@@ -82,4 +82,9 @@ public class User {
     public void setCompany(Company company) {
         this.company = company;
     }
+
+    @Override
+    public String toString() {
+        return this.getId() + ") Name: " + this.getName() + "; Company: " + this.getCompany().getName();
+    }
 }

@@ -46,6 +46,12 @@ public class UserService {
         }
     }
 
+    public void printUsers() {
+        for (var user : users) {
+            System.out.println(user.toString());
+        }
+    }
+
     public void addUser(String password) {
         if (!password.equals("admin")) return;
         Scanner read = new Scanner(System.in);

@@ -1,6 +1,5 @@
 package org.bibliohub.command.user;
 
-import org.bibliohub.model.User;
 
 public class SearchByTitleCommand extends UserCommand {
     private String title;
