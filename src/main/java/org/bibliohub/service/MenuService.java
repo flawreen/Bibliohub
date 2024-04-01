@@ -75,8 +75,12 @@ public class MenuService {
         return scanner.nextInt();
     }
 
+    long readBookId() {
+        System.out.println("Book id: ");
+        return waitForLong();
+    }
+
     void chooseOption(int option) {
-        long id;
         String str;
         switch (option) {
             case 1:
@@ -89,24 +93,16 @@ public class MenuService {
                 executeCommand(new ViewShelfCommand(user));
                 break;
             case 4:
-                System.out.println("Book id: ");
-                id = waitForLong();
-                executeCommand(new BorrowBookCommand(user, id));
+                executeCommand(new BorrowBookCommand(user, readBookId()));
                 break;
             case 5:
-                System.out.println("Book id: ");
-                id = waitForLong();
-                executeCommand(new ReturnBookCommand(user, id));
+                executeCommand(new ReturnBookCommand(user, readBookId()));
                 break;
             case 6:
-                System.out.println("Book id: ");
-                id = waitForLong();
-                executeCommand(new AddToWishlistCommand(user, id));
+                executeCommand(new AddToWishlistCommand(user, readBookId()));
                 break;
             case 7:
-                System.out.println("Book id: ");
-                id = waitForLong();
-                executeCommand(new RemoveFromWishlistByIdCommand(user, id));
+                executeCommand(new RemoveFromWishlistByIdCommand(user, readBookId()));
                 break;
             case 8:
                 System.out.println("Title: ");
