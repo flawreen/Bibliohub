@@ -1,9 +1,9 @@
 package org.bibliohub.command.company;
 
-public class AddCommand extends CompanyCommand {
+public class AddCompanyCommand extends CompanyCommand {
     private String password;
 
-    public AddCommand(String password) {
+    public AddCompanyCommand(String password) {
         this.password = password;
     }
 

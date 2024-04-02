@@ -1,10 +1,10 @@
 package org.bibliohub.command.library;
 
-public class DeleteByIdCommand extends LibraryCommand {
+public class RemoveBookFromLibraryCommand extends LibraryCommand {
     private String password;
     private long id;
 
-    public DeleteByIdCommand(String password, long id) {
+    public RemoveBookFromLibraryCommand(String password, long id) {
         this.password = password;
         this.id = id;
     }

@@ -1,9 +1,9 @@
 package org.bibliohub.command.book;
 
 
-public class AddCommand extends BookCommand {
+public class AddBookCommand extends BookCommand {
     private String password;
-    AddCommand(String password) {
+    public AddBookCommand(String password) {
         this.password = password;
     }
     @Override

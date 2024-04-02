@@ -35,10 +35,8 @@ public class UserService {
         }
     }
 
-    public void deleteUser(String password) {
+    public void deleteUser(String password, long id) {
         if (!password.equals("admin")) return;
-        Scanner read = new Scanner(System.in);
-        long id = read.nextLong();
         try {
             users.remove(getUserById(id));
         } catch (ArrayIndexOutOfBoundsException e) {

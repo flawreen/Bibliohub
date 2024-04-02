@@ -1,5 +1,12 @@
 package org.bibliohub.service;
 
+import org.bibliohub.command.book.AddBookCommand;
+import org.bibliohub.command.book.DeleteBookByIdCommand;
+import org.bibliohub.command.book.MakeBookAvailableCommand;
+import org.bibliohub.command.company.AddCompanyCommand;
+import org.bibliohub.command.company.DeleteCompanyByIdCommand;
+import org.bibliohub.command.library.AddBookToLibraryCommand;
+import org.bibliohub.command.library.RemoveBookFromLibraryCommand;
 import org.bibliohub.command.user.*;
 import org.bibliohub.interfaces.Command;
 import org.bibliohub.model.User;
@@ -59,7 +66,13 @@ public class MenuService {
                 5. Return a book
                 6. Add book to wishlist
                 7. Remove book from wishlist
-                8. Search available books""");
+                8. Search available books
+                Password protected
+                9./10. Add/Delete user
+                11./12. Add/Delete book
+                13./14. Add/Delete company
+                15./16. Add/Delete book to/from library
+                17. Make book available in library""");
         System.out.print("> ");
     }
 
@@ -80,7 +93,13 @@ public class MenuService {
         return waitForLong();
     }
 
+    String readPassword() {
+        System.out.println("Password: ");
+        return waitForString();
+    }
+
     void chooseOption(int option) {
+        long id;
         String str;
         switch (option) {
             case 1:
@@ -108,6 +127,45 @@ public class MenuService {
                 System.out.println("Title: ");
                 str = waitForString();
                 executeCommand(new SearchByTitleCommand(str));
+                break;
+            case 9:
+                executeCommand(new AddUserCommand(readPassword()));
+                break;
+            case 10:
+                System.out.println("User id: ");
+                id = waitForLong();
+                if (id != user.getId()) {
+                    executeCommand(new DeleteUserByIdCommand(readPassword(), id));
+                } else {
+                    System.out.println("Cannot delete an active user!");
+                }
+                break;
+            case 11:
+                executeCommand(new AddBookCommand(readPassword()));
+                break;
+            case 12:
+                executeCommand(new DeleteBookByIdCommand(readPassword(), readBookId()));
+                break;
+            case 13:
+                executeCommand(new AddCompanyCommand(readPassword()));
+                break;
+            case 14:
+                System.out.println("Company id: ");
+                id = waitForLong();
+                if (id != user.getCompany().getId()) {
+                    executeCommand(new DeleteCompanyByIdCommand(readPassword(), id));
+                } else {
+                    System.out.println("Cannot delete an active user's company!");
+                }
+                break;
+            case 15:
+                executeCommand(new AddBookToLibraryCommand(readPassword()));
+                break;
+            case 16:
+                executeCommand(new RemoveBookFromLibraryCommand(readPassword(), readBookId()));
+                break;
+            case 17:
+                executeCommand(new MakeBookAvailableCommand(readPassword(), readBookId()));
                 break;
             default:
                 System.out.println("Choose a valid option!");
