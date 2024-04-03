@@ -44,17 +44,17 @@ public class MenuService {
         return instance;
     }
 
-    void executeCommand(Command command) {
+    private void executeCommand(Command command) {
         command.execute();
     }
 
-    void chooseUser() {
+    public void chooseUser() {
         executeCommand(new PrintUsersCommand());
         int id = waitForOption();
         user = userService.getUserById(id);
     }
 
-    void printMenu() {
+    public void printMenu() {
         System.out.println("""
                 []//////////////////[]
                 [] Bibliohub menu ||||
@@ -72,36 +72,39 @@ public class MenuService {
                 11./12. Add/Delete book
                 13./14. Add/Delete company
                 15./16. Add/Delete book to/from library
-                17. Make book available in library""");
+                17. Make book available in library
+                -1. Exit""");
         System.out.print("> ");
     }
 
-    String waitForString() {
+    private String waitForString() {
         return scanner.next();
     }
 
-    long waitForLong() {
+    private long waitForLong() {
         return scanner.nextLong();
     }
 
-    int waitForOption() {
+    public int waitForOption() {
         return scanner.nextInt();
     }
 
-    long readBookId() {
+    private long readBookId() {
         System.out.println("Book id: ");
         return waitForLong();
     }
 
-    String readPassword() {
+    private String readPassword() {
         System.out.println("Password: ");
         return waitForString();
     }
 
-    void chooseOption(int option) {
+    public void chooseOption(int option) {
         long id;
         String str;
         switch (option) {
+            case -1:
+                return;
             case 1:
                 executeCommand(new ViewAvailableBooksCommand());
                 break;

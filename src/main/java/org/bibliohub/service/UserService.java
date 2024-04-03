@@ -45,6 +45,10 @@ public class UserService {
     }
 
     public void printUsers() {
+        if (users.isEmpty()) {
+            System.out.println("No users found.");
+            return;
+        }
         for (var user : users) {
             System.out.println(user.toString());
         }
