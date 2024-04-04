@@ -3,6 +3,7 @@ package org.bibliohub.service;
 import org.bibliohub.model.Book;
 import org.bibliohub.model.Company;
 import org.bibliohub.model.Shelf;
+import org.bibliohub.model.User;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -13,6 +14,10 @@ public class CompanyService {
 
     private CompanyService() {
         this.companies = new ArrayList<>();
+    }
+
+    public void setCompanies(ArrayList<Company> companies) {
+        this.companies = companies;
     }
 
     public static CompanyService getInstance() {
@@ -28,6 +33,10 @@ public class CompanyService {
         } catch (ArrayIndexOutOfBoundsException e) {
             return null;
         }
+    }
+
+    public void addEmployee(long id, User user) {
+        getCompanyById(id).getEmployees().add(user);
     }
 
     public void deleteCompany(long id, String password) {

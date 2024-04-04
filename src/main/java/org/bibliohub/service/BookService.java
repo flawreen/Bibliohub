@@ -4,7 +4,6 @@ import org.bibliohub.factory.BookFactory;
 import org.bibliohub.model.Book;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class BookService implements BookFactory {
     private ArrayList<Book> books;
@@ -58,5 +57,9 @@ public class BookService implements BookFactory {
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Book with id " + id + " not found.");
         }
+    }
+
+    public void setBooks(ArrayList<Book> books) {
+        this.books = books;
     }
 }

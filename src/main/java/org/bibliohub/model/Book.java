@@ -17,9 +17,9 @@ public abstract class Book {
         this.isbn = isbn;
     }
 
-    protected ArrayList<Shelf> shelves;
+    protected Shelf shelf;
 
-    protected ArrayList<Wishlist> wishlists;
+    protected Wishlist wishlist;
 
     public Book() {
 
@@ -32,48 +32,31 @@ public abstract class Book {
         this.isbn = isbn;
     }
 
-    public Book(long id, String title, String author, String isbn, ArrayList<Shelf> shelves, ArrayList<Wishlist> wishlists) {
+    public Book(long id, String title, String author, String isbn, Shelf shelf, Wishlist wishlist) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.isbn = isbn;
-        this.shelves = shelves;
-        this.wishlists = wishlists;
-    }
-
-    public Book(long id, String title, String author, ArrayList<Wishlist> wishlists, String isbn) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.isbn = isbn;
-        this.wishlists = wishlists;
-    }
-
-    public Book(long id, String title, String author, String isbn, ArrayList<Shelf> shelves) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.isbn = isbn;
-        this.shelves = shelves;
-    }
-
-    public ArrayList<Wishlist> getWishlists() {
-        return wishlists;
-    }
-
-    public void setWishlists(ArrayList<Wishlist> wishlists) {
-        this.wishlists = wishlists;
+        this.shelf = shelf;
+        this.wishlist = wishlist;
     }
 
 
-    public ArrayList<Shelf> getShelves() {
-        return shelves;
+    public Shelf getShelf() {
+        return shelf;
     }
 
-    public void setShelves(ArrayList<Shelf> shelves) {
-        this.shelves = shelves;
+    public void setShelf(Shelf shelf) {
+        this.shelf = shelf;
     }
 
+    public Wishlist getWishlist() {
+        return wishlist;
+    }
+
+    public void setWishlist(Wishlist wishlist) {
+        this.wishlist = wishlist;
+    }
 
     public long getId() {
         return id;

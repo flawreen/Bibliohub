@@ -25,13 +25,12 @@ public class User {
         this.wishlistId = wishlistId;
     }
 
-    public User(long id, String name, long companyId, long shelfId, long wishlistId, Company company) throws Exception {
+    public User(long id, String name, long companyId, long shelfId, long wishlistId, Company company) {
         this.id = id;
         this.name = name;
         this.companyId = companyId;
         this.shelfId = shelfId;
         this.wishlistId = wishlistId;
-        if (company == null) throw new Exception("Company not found");
         this.company = company;
     }
 

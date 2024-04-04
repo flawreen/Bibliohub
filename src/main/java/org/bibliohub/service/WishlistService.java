@@ -9,6 +9,7 @@ public class WishlistService {
 
     private ArrayList<Wishlist> wishlists;
     private static WishlistService instance;
+    private static final BookService bookService = BookService.getInstance();
 
     private WishlistService() {
         this.wishlists = new ArrayList<>();
@@ -41,6 +42,7 @@ public class WishlistService {
                 throw new Exception("Book already wishlisted");
             }
             wishlist.getWishlistBooks().add(book);
+            bookService.getBookById(book.getId()).setWishlist(getWishlistById(id));
         } catch (NullPointerException e) {
             System.out.println("Wishlist with id " + id + " not found");
         } catch (Exception e) {

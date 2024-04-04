@@ -73,7 +73,7 @@ public class MenuService {
                 13./14. Add/Delete company
                 15./16. Add/Delete book to/from library
                 17. Make book available in library
-                -1. Exit""");
+                0. Exit""");
         System.out.print("> ");
     }
 
@@ -103,7 +103,7 @@ public class MenuService {
         long id;
         String str;
         switch (option) {
-            case -1:
+            case 0:
                 return;
             case 1:
                 executeCommand(new ViewAvailableBooksCommand());

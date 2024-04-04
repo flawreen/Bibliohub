@@ -20,6 +20,13 @@ public class UserService {
         this.users = new ArrayList<>();
     }
 
+    public void setUsers(ArrayList<User> users) {
+        for (var user : users) {
+            users.add(user);
+            companyService.addEmployee(user.getCompanyId(), users.getLast());
+        }
+    }
+
     public static UserService getInstance() {
         if (instance == null) {
             instance = new UserService();
@@ -71,6 +78,7 @@ public class UserService {
                     wishlistService.addWishlist(id),
                     companyService.getCompanyById(companyId)
             ));
+            companyService.addEmployee(companyId, users.getLast());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
