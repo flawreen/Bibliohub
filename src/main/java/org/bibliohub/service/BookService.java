@@ -24,8 +24,12 @@ public class BookService implements BookFactory {
 
     public Book getBookById(long id) {
         try {
-            return books.get((int) id);
-        } catch (ArrayIndexOutOfBoundsException e) {
+            int i = 0;
+            while (books.get(i).getId() != id) {
+                i++;
+            }
+            return books.get(i);
+        } catch (IndexOutOfBoundsException e) {
             return null;
         }
     }

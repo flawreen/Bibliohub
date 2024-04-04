@@ -29,8 +29,12 @@ public class ShelfService {
 
     public Shelf getShelfById(long id) {
         try {
-            return shelves.get((int) id);
-        } catch (ArrayIndexOutOfBoundsException e) {
+            int i = 0;
+            while (shelves.get(i).getId() != id) {
+                i++;
+            }
+            return shelves.get(i);
+        } catch (IndexOutOfBoundsException e) {
             return null;
         }
     }

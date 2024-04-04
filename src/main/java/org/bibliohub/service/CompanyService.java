@@ -29,8 +29,12 @@ public class CompanyService {
 
     public Company getCompanyById(long id) {
         try {
-            return companies.get((int) id);
-        } catch (ArrayIndexOutOfBoundsException e) {
+            int i = 0;
+            while (companies.get(i).getId() != id) {
+                i++;
+            }
+            return companies.get(i);
+        } catch (IndexOutOfBoundsException e) {
             return null;
         }
     }
@@ -43,7 +47,7 @@ public class CompanyService {
         if (!password.equals("admin")) return;
         try {
             companies.remove(getCompanyById(id));
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("Company with id " + id + " not found.");
         }
     }

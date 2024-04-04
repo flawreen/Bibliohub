@@ -21,9 +21,9 @@ public class UserService {
     }
 
     public void setUsers(ArrayList<User> users) {
-        for (var user : users) {
-            users.add(user);
-            companyService.addEmployee(user.getCompanyId(), users.getLast());
+        for (int i = 0; i < users.size(); i++) {
+            this.users.add(users.get(i));
+            companyService.addEmployee(this.users.getLast().getCompanyId(), this.users.getLast());
         }
     }
 
@@ -36,8 +36,12 @@ public class UserService {
 
     public User getUserById(long id) {
         try {
-            return users.get((int) id);
-        } catch (ArrayIndexOutOfBoundsException e) {
+            int i = 0;
+            while (users.get(i).getId() != id) {
+                i++;
+            }
+            return users.get(i);
+        } catch (IndexOutOfBoundsException e) {
             return null;
         }
     }
@@ -46,7 +50,7 @@ public class UserService {
         if (!password.equals("admin")) return;
         try {
             users.remove(getUserById(id));
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("User with id " + id + " not found.");
         }
     }

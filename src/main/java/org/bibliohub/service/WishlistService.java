@@ -29,7 +29,11 @@ public class WishlistService {
 
     public Wishlist getWishlistById(long id) {
         try {
-            return wishlists.get((int) id);
+            int i = 0;
+            while (wishlists.get(i).getId() != id) {
+                i++;
+            }
+            return wishlists.get(i);
         } catch (ArrayIndexOutOfBoundsException e) {
             return null;
         }

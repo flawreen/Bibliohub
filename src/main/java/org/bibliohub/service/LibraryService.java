@@ -31,9 +31,9 @@ public class LibraryService implements PrintBookArray {
     }
 
     public ArrayList<Book> searchBooksByTitle(String title) {
-        ArrayList<Book> res = new ArrayList<Book>();
+        ArrayList<Book> res = new ArrayList<>();
         for (var book : getAvailableBooks()) {
-            if (book.getTitle().indexOf(title) != -1) {
+            if (book.getTitle().toLowerCase().indexOf(title.toLowerCase()) != -1) {
                 res.add(book);
             }
         }
@@ -65,8 +65,12 @@ public class LibraryService implements PrintBookArray {
 
     void removeBookById(long id) {
         try {
-            getAvailableBooks().remove(getAvailableBooks().get((int) id));
-        } catch (ArrayIndexOutOfBoundsException e) {
+            int i = 0;
+            while (getAvailableBooks().get(i).getId() != id) {
+                i++;
+            }
+            getAvailableBooks().remove(i);
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("Book with id " + id + " not found.");
         }
     }
@@ -77,8 +81,8 @@ public class LibraryService implements PrintBookArray {
             return;
         }
         try {
-            getAvailableBooks().remove(getAvailableBooks().get((int) id));
-        } catch (ArrayIndexOutOfBoundsException e) {
+            removeBookById(id);
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("Book with id " + id + " not found.");
         }
     }
