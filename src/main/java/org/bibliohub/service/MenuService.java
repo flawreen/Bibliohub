@@ -30,6 +30,7 @@ import java.util.Scanner;
 public class MenuService {
     private User user;
     private static final UserService userService = UserService.getInstance();
+    private static final CompanyService companyService = CompanyService.getInstance();
     private static final Scanner scanner = new Scanner(System.in);
     private static MenuService instance;
 
@@ -56,9 +57,9 @@ public class MenuService {
 
     public void printMenu() {
         System.out.println("""
-                []//////////////////[]
-                [] Bibliohub menu ||||
-                []/////////////// VVVV
+                \n[]------------------[]
+                || Bibliohub menu   ||
+                []------------------[]
                 1. View available books
                 2. View wishlisted books
                 3. View borrowed books
@@ -90,12 +91,12 @@ public class MenuService {
     }
 
     private long readBookId() {
-        System.out.println("Book id: ");
+        System.out.print("Book id: ");
         return waitForLong();
     }
 
     private String readPassword() {
-        System.out.println("Password: ");
+        System.out.print("Password: ");
         return waitForString();
     }
 
@@ -127,7 +128,7 @@ public class MenuService {
                 executeCommand(new RemoveFromWishlistByIdCommand(user, readBookId()));
                 break;
             case 8:
-                System.out.println("Title: ");
+                System.out.print("Title: ");
                 str = waitForString();
                 executeCommand(new SearchByTitleCommand(str));
                 break;
@@ -135,7 +136,7 @@ public class MenuService {
                 executeCommand(new AddUserCommand(readPassword()));
                 break;
             case 10:
-                System.out.println("User id: ");
+                System.out.printf("User id [%s\b\b]: ", userService.printUsers());
                 id = waitForLong();
                 if (id != user.getId()) {
                     executeCommand(new DeleteUserByIdCommand(readPassword(), id));
@@ -153,7 +154,7 @@ public class MenuService {
                 executeCommand(new AddCompanyCommand(readPassword()));
                 break;
             case 14:
-                System.out.println("Company id: ");
+                System.out.printf("Company id [%s\b\b]: ", companyService.printCompanies());
                 id = waitForLong();
                 if (id != user.getCompany().getId()) {
                     executeCommand(new DeleteCompanyByIdCommand(readPassword(), id));

@@ -6,6 +6,8 @@ public class User {
     private long id;
     private String name;
 
+    private static int nextId = 1;
+
     private long companyId;
 
     private long shelfId;
@@ -15,6 +17,10 @@ public class User {
     private Company company;
 
     public User() {
+    }
+
+    public static int getNextId() {
+        return nextId;
     }
 
     public long getWishlistId() {
@@ -32,6 +38,7 @@ public class User {
         this.shelfId = shelfId;
         this.wishlistId = wishlistId;
         this.company = company;
+        nextId++;
     }
 
     public User(long id, String name, long companyId, long shelfId, Company company) {
@@ -40,6 +47,7 @@ public class User {
         this.companyId = companyId;
         this.shelfId = shelfId;
         this.company = company;
+        nextId++;
     }
 
     public long getShelfId() {

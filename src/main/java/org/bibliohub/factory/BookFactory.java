@@ -3,26 +3,31 @@ package org.bibliohub.factory;
 import org.bibliohub.model.Book;
 import org.bibliohub.model.EBook;
 import org.bibliohub.model.PhysicalBook;
+import org.bibliohub.service.BookService;
 
 import java.util.Scanner;
 
 public interface BookFactory {
+    BookService bookService = BookService.getInstance();
 
     static Book createBook() throws Exception {
         Scanner read = new Scanner(System.in);
-        System.out.print("Id: ");
-        long id = read.nextLong();
-        System.out.print("\nTitle: ");
-        String title = read.next();
-        System.out.print("\nAuthor: ");
-        String author = read.next();
-        System.out.print("\nISBN: ");
-        String isbn = read.next();
-        System.out.println("Type:\n1)Physical Book\n2)EBook");
-        String type = read.next();
+        long id = Book.getNextId();
 
-        if (type.equals("EBook")) {
-            System.out.println("EBook format:\n1) pdf\n2) epub");
+        System.out.print("\nTitle: ");
+        String title = read.nextLine();
+
+        System.out.print("\nAuthor: ");
+        String author = read.nextLine();
+
+        System.out.print("\nISBN: ");
+        String isbn = read.nextLine();
+
+        System.out.println("Type:\n1. Physical Book 2. EBook");
+        int type = read.nextInt();
+
+        if (type == 2) {
+            System.out.println("EBook format:\n1. pdf 2. epub");
             StringBuilder format = new StringBuilder();
             int option = read.nextInt();
 
@@ -32,8 +37,8 @@ public interface BookFactory {
 
             return new EBook(id, title, author, isbn, format.toString());
 
-        } else if (type.equals("Physical")) {
-            System.out.println("Book cover type:\n1) hardcover\n2) paperback");
+        } else if (type == 1) {
+            System.out.println("Book cover type:\n1. hardcover 2. paperback");
             StringBuilder cover = new StringBuilder();
             int option = read.nextInt();
 

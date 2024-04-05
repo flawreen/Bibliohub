@@ -3,11 +3,12 @@ package org.bibliohub.service;
 import org.bibliohub.factory.BookFactory;
 import org.bibliohub.model.Book;
 
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 public class BookService implements BookFactory {
     private ArrayList<Book> books;
-
     private static BookService instance;
     private static final LibraryService libraryService = LibraryService.getInstance();
 
@@ -20,6 +21,10 @@ public class BookService implements BookFactory {
             instance = new BookService();
         }
         return instance;
+    }
+
+    public ArrayList<Book> getBooks() {
+        return books;
     }
 
     public Book getBookById(long id) {
@@ -38,7 +43,8 @@ public class BookService implements BookFactory {
         if (!password.equals("admin")) return null;
         try {
             Book newBook = BookFactory.createBook();
-            books.add(newBook);
+            this.books.add(newBook);
+            System.out.printf("Successfully added book %s by %s with id %d!\n", newBook.getTitle(), newBook.getAuthor(), newBook.getId());
             return newBook;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -55,15 +61,23 @@ public class BookService implements BookFactory {
         if (!password.equals("admin")) {
             return;
         }
-        libraryService.removeBookById(id);
         try {
+            try {
+                getBookById(id).getShelf().getBookList().remove(getBookById(id));
+            } catch (NullPointerException ignored) {}
+            try {
+                getBookById(id).getWishlist().getWishlistBooks().remove(getBookById(id));
+            } catch (NullPointerException ignored) {}
+
+            libraryService.removeBookById(id);
             books.remove(getBookById(id));
-        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.printf("Successfully deleted book with id %d!\n", id);
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("Book with id " + id + " not found.");
         }
     }
 
     public void setBooks(ArrayList<Book> books) {
-        this.books = books;
+        this.books.addAll(books);
     }
 }

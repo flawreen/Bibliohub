@@ -7,6 +7,8 @@ public abstract class Book {
     protected String title;
     protected String author;
 
+    private static int nextId = 1;
+
     protected String isbn;
 
     public String getIsbn() {
@@ -25,11 +27,16 @@ public abstract class Book {
 
     }
 
+    public static int getNextId() {
+        return nextId;
+    }
+
     public Book(long id, String title, String author, String isbn) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.isbn = isbn;
+        nextId++;
     }
 
     public Book(long id, String title, String author, String isbn, Shelf shelf, Wishlist wishlist) {
@@ -39,6 +46,7 @@ public abstract class Book {
         this.isbn = isbn;
         this.shelf = shelf;
         this.wishlist = wishlist;
+        nextId++;
     }
 
 
@@ -84,9 +92,9 @@ public abstract class Book {
 
     @Override
     public String toString() {
-        return "____________________" + this.id + "______________________" + "\n" +
+        return "/___________________" + this.id + "_____________________\\" + "\n" +
                 "| Title: " + this.getTitle() + "\n" +
                 "| Author: " + this.getAuthor() + "\n" +
-                "\\___________________________________________/";
+                "\\_________________________________________/";
     }
 }

@@ -7,6 +7,8 @@ public class Company {
     private String name;
     private long cui;
 
+    private static int nextId = 1;
+
     private ArrayList<User> employees;
 
 
@@ -15,12 +17,18 @@ public class Company {
         this.name = name;
         this.cui = cui;
         this.employees = new ArrayList<User>();
+        nextId++;
     }
 
     public Company(long id, String name, ArrayList<User> employees) {
         this.id = id;
         this.name = name;
         this.employees = employees;
+        nextId++;
+    }
+
+    public static int getNextId() {
+        return nextId;
     }
 
     public long getCui() {

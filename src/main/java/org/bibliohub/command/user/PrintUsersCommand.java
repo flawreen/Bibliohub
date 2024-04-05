@@ -6,6 +6,6 @@ public class PrintUsersCommand extends UserCommand {
 
     @Override
     public void execute() {
-        userService.printUsers();
+        userService.printUsersLn();
     }
 }

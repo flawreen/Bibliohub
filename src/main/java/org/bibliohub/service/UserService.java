@@ -1,12 +1,13 @@
 package org.bibliohub.service;
 
+import org.bibliohub.interfaces.PrintBookArray;
 import org.bibliohub.model.Book;
 import org.bibliohub.model.Company;
 import org.bibliohub.model.User;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class UserService {
+public class UserService implements PrintBookArray {
     private ArrayList<User> users;
     private static final LibraryService libraryService = LibraryService.getInstance();
     private static final ShelfService shelfService = ShelfService.getInstance();
@@ -49,13 +50,18 @@ public class UserService {
     public void deleteUser(String password, long id) {
         if (!password.equals("admin")) return;
         try {
-            users.remove(getUserById(id));
+            var deleted = users.remove(getUserById(id));
+            if (deleted) {
+                System.out.printf("Successfully deleted user with id %d!\n", id);
+            } else {
+                System.out.printf("User with id %d does not exist!\n", id);
+            }
         } catch (IndexOutOfBoundsException e) {
             System.out.println("User with id " + id + " not found.");
         }
     }
 
-    public void printUsers() {
+    public void printUsersLn() {
         if (users.isEmpty()) {
             System.out.println("No users found.");
             return;
@@ -68,11 +74,14 @@ public class UserService {
     public void addUser(String password) {
         if (!password.equals("admin")) return;
         Scanner read = new Scanner(System.in);
-        long id = users.size();
+        long id = User.getNextId();
+
         System.out.print("\nName: ");
-        String name = read.next();
-        System.out.print("\nCompany Id: ");
+        String name = read.nextLine();
+
+        System.out.printf("\nCompany Id [%s\b\b]: ", companyService.printCompanies());
         long companyId = read.nextLong();
+
         try {
             users.add(new User(
                     id,
@@ -83,6 +92,7 @@ public class UserService {
                     companyService.getCompanyById(companyId)
             ));
             companyService.addEmployee(companyId, users.getLast());
+            System.out.printf("Successfully added user %s with id %d, employee of %s!\n", name, id, companyService.getCompanyById(companyId).getName());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -134,10 +144,12 @@ public class UserService {
                     availableBooks++;
                 }
             }
-            System.out.println(wishlist.toString());
-            System.out.printf("%d books available to borrow", availableBooks);
+            System.out.println(PrintBookArray.printBooks(wishlist));
+            if (!wishlist.isEmpty()) {
+                System.out.printf("%d books available to borrow\n", availableBooks);
+            }
         } catch (NullPointerException e) {
-            System.out.println("Wishlist with id " + wishlistId + " not found");
+            System.out.println("Wishlist with id " + wishlistId + " not found\n");
         }
     }
 
@@ -145,7 +157,7 @@ public class UserService {
         try {
             System.out.println(shelfService.getShelfById(shelfId).toString());
         } catch (NullPointerException e) {
-            System.out.println("Shelf with id " + shelfId + " not found");
+            System.out.println("Shelf with id " + shelfId + " not found\n");
         }
     }
 
@@ -156,14 +168,7 @@ public class UserService {
     }
 
     private void printBooks(ArrayList<Book> books) {
-        for (int i = 0; i < books.size(); ++i) {
-            System.out.print(books.get(i).toString());
-            if (i > 0 && i % 2 == 0) {
-                System.out.println();
-            } else {
-                System.out.print("\t");
-            }
-        }
+        System.out.println(PrintBookArray.printBooks(books));
     }
 
     public void searchBookByTitle(String title) {
@@ -172,7 +177,16 @@ public class UserService {
             System.out.println("No books found");
             return;
         }
-        System.out.printf("%d books found", res.size());
+        System.out.printf("%d books found\n", res.size());
         printBooks(res);
     }
+
+    String printUsers() {
+        var res = new StringBuilder();
+        for (var user : users) {
+            res.append(user.getId()).append(". ").append(user.getName()).append("; ");
+        }
+        return res.toString();
+    }
+
 }

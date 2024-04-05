@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class CompanyService {
     private static CompanyService instance;
     private ArrayList<Company> companies;
+    private static final UserService userService = UserService.getInstance();
 
     private CompanyService() {
         this.companies = new ArrayList<>();
@@ -46,7 +47,11 @@ public class CompanyService {
     public void deleteCompany(long id, String password) {
         if (!password.equals("admin")) return;
         try {
+            for (var user : getCompanyById(id).getEmployees()) {
+                userService.deleteUser("admin", user.getId());
+            }
             companies.remove(getCompanyById(id));
+            System.out.printf("Successfully deleted company with id %d!\n", id);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Company with id " + id + " not found.");
         }
@@ -55,13 +60,24 @@ public class CompanyService {
     public void addCompany(String password) {
         if (!password.equals("admin")) return;
         Scanner read = new Scanner(System.in);
-        System.out.print("Id: ");
-        long id = read.nextLong();
+        long id = Company.getNextId();
+
         System.out.print("\nName: ");
-        String name = read.next();
+        String name = read.nextLine();
+
         System.out.print("\nCUI: ");
         long cui = read.nextLong();
+
+        System.out.printf("Successfully added company %s with id %d!\n", name, id);
         companies.add(new Company(id, name, cui));
+    }
+
+    String printCompanies() {
+        var res = new StringBuilder();
+        for (var company : companies) {
+            res.append(company.getId()).append(". ").append(company.getName()).append("; ");
+        }
+        return res.toString();
     }
 
 }

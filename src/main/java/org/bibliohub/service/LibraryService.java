@@ -71,7 +71,7 @@ public class LibraryService implements PrintBookArray {
             }
             getAvailableBooks().remove(i);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Book with id " + id + " not found.");
+            System.out.println("Book with id " + id + " not found in library.");
         }
     }
 
@@ -82,6 +82,7 @@ public class LibraryService implements PrintBookArray {
         }
         try {
             removeBookById(id);
+            System.out.printf("Successfully deleted book with id %d from library!\n", id);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Book with id " + id + " not found.");
         }

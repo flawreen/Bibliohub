@@ -44,7 +44,7 @@ public class ShelfService {
             getShelfById(id).getBookList().add(book);
             bookService.getBookById(book.getId()).setShelf(getShelfById(id));
         } catch (NullPointerException e) {
-            System.out.println("Shelf with id " + id + " not found.");
+            System.out.println("Could not add book to shelf with id " + id + " not found.\n");
         }
     }
 
@@ -52,7 +52,7 @@ public class ShelfService {
         try {
             getShelfById((int) id).getBookList().remove(book);
         } catch (NullPointerException e) {
-            System.out.println("Shelf with id " + id + " not found.");
+            System.out.println("Shelf with id " + id + " not found.\n");
         }
     }
 
