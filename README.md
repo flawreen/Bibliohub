@@ -6,7 +6,7 @@ Welcome to Bibliohub, where the world of literature meets the innovation of coll
 
 <img src="https://github.com/tandpfun/skill-icons/blob/main/icons/Java-Dark.svg" width="128px" height="128px" /> <img src="https://github.com/tandpfun/skill-icons/blob/main/icons/Maven-Dark.svg"  width="128px" height="128px"/> <img src="https://github.com/tandpfun/skill-icons/blob/main/icons/PostgreSQL-Dark.svg"  width="128px" height="128px"/> 
 #### Preview:
-<img src="https://github.com/flawreen/Bibliohub/assets/83332450/84ae0648-daed-4410-a90a-84c931abe788" width="425"/> <img src="https://github.com/flawreen/Bibliohub/assets/83332450/c4f3c6b5-4bdd-4fb4-a8f3-c3f593c4c788" width="425"/> 
+<img src="https://github.com/flawreen/Bibliohub/assets/83332450/84ae0648-daed-4410-a90a-84c931abe788" width="400"/> <img src="https://github.com/flawreen/Bibliohub/assets/83332450/c4f3c6b5-4bdd-4fb4-a8f3-c3f593c4c788" width="400"/> 
 
 
 <details>
