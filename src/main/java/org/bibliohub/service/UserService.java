@@ -121,7 +121,11 @@ public class UserService implements PrintBookArray {
 
     public void addToWishlist(long userId, long bookId) {
         try {
-            wishlistService.addBook(getUserById((int) userId).getWishlistId(), bookService.getBookById((int) bookId));
+            if (libraryService.getAvailableBooks().indexOf(bookService.getBookById(bookId)) != -1) {
+                wishlistService.addBook(getUserById((int) userId).getWishlistId(), bookService.getBookById((int) bookId));
+            } else {
+                System.out.printf("Book with id %d not available in library.\n", bookId);
+            }
         } catch (NullPointerException e) {
             System.out.println("Error adding to wishlist book with id " + bookId);
         }

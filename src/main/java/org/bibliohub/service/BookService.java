@@ -65,13 +65,18 @@ public class BookService implements BookFactory {
             try {
                 getBookById(id).getShelf().getBookList().remove(getBookById(id));
             } catch (NullPointerException ignored) {}
+
             try {
                 getBookById(id).getWishlist().getWishlistBooks().remove(getBookById(id));
             } catch (NullPointerException ignored) {}
 
             libraryService.removeBookById(id);
-            books.remove(getBookById(id));
-            System.out.printf("Successfully deleted book with id %d!\n", id);
+            var deleted = books.remove(getBookById(id));
+            if (deleted) {
+                System.out.printf("Successfully deleted book with id %d!\n", id);
+            } else {
+                System.out.printf("Couldn't delete book with id %d!\n", id);
+            }
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Book with id " + id + " not found.");
         }
