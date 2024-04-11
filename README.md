@@ -9,13 +9,13 @@ Welcome to Bibliohub, where the world of literature meets the innovation of coll
 <div style="display:flex;">
 
  <img src="https://refactoring.guru/images/patterns/cards/singleton-mini-2x.png">
- <label>Command</label>
+ <label>Singleton</label>
 
  <img src="https://refactoring.guru/images/patterns/cards/command-mini-2x.png">
- <label>Factory</label>
+ <label>Command</label>
 
  <img src="https://refactoring.guru/images/patterns/cards/factory-method-mini-2x.png">
- <label>Singleton</label>
+ <label>Factory</label>
 </div>
 
 ### Preview:
