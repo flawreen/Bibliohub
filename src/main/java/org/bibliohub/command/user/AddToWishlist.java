@@ -1,10 +1,8 @@
 package org.bibliohub.command.user;
 
-import org.bibliohub.model.User;
-
-public class AddToWishlistCommand extends UserCommand {
+public class AddToWishlist extends User {
     private long bookId;
-    public AddToWishlistCommand(User user, long bookId) {
+    public AddToWishlist(org.bibliohub.model.User user, long bookId) {
         super(user);
         this.bookId = bookId;
     }

@@ -1,16 +1,17 @@
 package org.bibliohub.service;
 
-import org.bibliohub.command.book.AddBookCommand;
-import org.bibliohub.command.book.DeleteBookByIdCommand;
-import org.bibliohub.command.book.MakeBookAvailableCommand;
-import org.bibliohub.command.company.AddCompanyCommand;
-import org.bibliohub.command.company.DeleteCompanyByIdCommand;
-import org.bibliohub.command.library.AddBookToLibraryCommand;
-import org.bibliohub.command.library.RemoveBookFromLibraryCommand;
+import org.bibliohub.command.book.AddBook;
+import org.bibliohub.command.book.DeleteBookById;
+import org.bibliohub.command.book.MakeBookAvailable;
+import org.bibliohub.command.company.AddCompany;
+import org.bibliohub.command.company.DeleteCompanyById;
+import org.bibliohub.command.library.AddBookToLibrary;
+import org.bibliohub.command.library.RemoveBookFromLibrary;
 import org.bibliohub.command.user.*;
 import org.bibliohub.interfaces.Command;
 import org.bibliohub.model.User;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 /*
@@ -29,8 +30,18 @@ import java.util.Scanner;
 
 public class MenuService {
     private User user;
-    private static final UserService userService = UserService.getInstance();
-    private static final CompanyService companyService = CompanyService.getInstance();
+    private static final UserService userService;
+    private static final CompanyService companyService;
+
+    static {
+        try {
+            userService = UserService.getInstance();
+            companyService = CompanyService.getInstance();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private static final Scanner scanner = new Scanner(System.in);
     private static MenuService instance;
 
@@ -50,7 +61,7 @@ public class MenuService {
     }
 
     public void chooseUser() {
-        executeCommand(new PrintUsersCommand());
+        executeCommand(new PrintUsers());
         int id = waitForOption();
         user = userService.getUserById(id);
     }
@@ -107,69 +118,69 @@ public class MenuService {
             case 0:
                 return;
             case 1:
-                executeCommand(new ViewAvailableBooksCommand());
+                executeCommand(new ViewAvailableBooks());
                 break;
             case 2:
-                executeCommand(new ViewWishlistCommand(user));
+                executeCommand(new ViewWishlist(user));
                 break;
             case 3:
-                executeCommand(new ViewShelfCommand(user));
+                executeCommand(new ViewShelf(user));
                 break;
             case 4:
-                executeCommand(new BorrowBookCommand(user, readBookId()));
+                executeCommand(new BorrowBook(user, readBookId()));
                 break;
             case 5:
-                executeCommand(new ReturnBookCommand(user, readBookId()));
+                executeCommand(new ReturnBook(user, readBookId()));
                 break;
             case 6:
-                executeCommand(new AddToWishlistCommand(user, readBookId()));
+                executeCommand(new AddToWishlist(user, readBookId()));
                 break;
             case 7:
-                executeCommand(new RemoveFromWishlistByIdCommand(user, readBookId()));
+                executeCommand(new RemoveFromWishlistById(user, readBookId()));
                 break;
             case 8:
                 System.out.print("Title: ");
                 str = waitForString();
-                executeCommand(new SearchByTitleCommand(str));
+                executeCommand(new SearchByTitle(str));
                 break;
             case 9:
-                executeCommand(new AddUserCommand(readPassword()));
+                executeCommand(new AddUser(readPassword()));
                 break;
             case 10:
                 System.out.printf("User id [%s\b\b]: ", userService.printUsers());
                 id = waitForLong();
                 if (id != user.getId()) {
-                    executeCommand(new DeleteUserByIdCommand(readPassword(), id));
+                    executeCommand(new DeleteUserById(readPassword(), id));
                 } else {
                     System.out.println("Cannot delete an active user!");
                 }
                 break;
             case 11:
-                executeCommand(new AddBookCommand(readPassword()));
+                executeCommand(new AddBook(readPassword()));
                 break;
             case 12:
-                executeCommand(new DeleteBookByIdCommand(readPassword(), readBookId()));
+                executeCommand(new DeleteBookById(readPassword(), readBookId()));
                 break;
             case 13:
-                executeCommand(new AddCompanyCommand(readPassword()));
+                executeCommand(new AddCompany(readPassword()));
                 break;
             case 14:
                 System.out.printf("Company id [%s\b\b]: ", companyService.printCompanies());
                 id = waitForLong();
                 if (id != user.getCompany().getId()) {
-                    executeCommand(new DeleteCompanyByIdCommand(readPassword(), id));
+                    executeCommand(new DeleteCompanyById(readPassword(), id));
                 } else {
                     System.out.println("Cannot delete an active user's company!");
                 }
                 break;
             case 15:
-                executeCommand(new AddBookToLibraryCommand(readPassword()));
+                executeCommand(new AddBookToLibrary(readPassword()));
                 break;
             case 16:
-                executeCommand(new RemoveBookFromLibraryCommand(readPassword(), readBookId()));
+                executeCommand(new RemoveBookFromLibrary(readPassword(), readBookId()));
                 break;
             case 17:
-                executeCommand(new MakeBookAvailableCommand(readPassword(), readBookId()));
+                executeCommand(new MakeBookAvailable(readPassword(), readBookId()));
                 break;
             default:
                 System.out.println("Choose a valid option!");

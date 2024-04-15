@@ -3,10 +3,10 @@ package org.bibliohub.command.company;
 import org.bibliohub.interfaces.Command;
 import org.bibliohub.service.CompanyService;
 
-public abstract class CompanyCommand implements Command {
+public abstract class Company implements Command {
     protected static final CompanyService companyService = CompanyService.getInstance();
 
-    CompanyCommand() {
+    Company() {
 
     }
 

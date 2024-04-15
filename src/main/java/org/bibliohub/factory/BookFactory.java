@@ -8,7 +8,6 @@ import org.bibliohub.service.BookService;
 import java.util.Scanner;
 
 public interface BookFactory {
-    BookService bookService = BookService.getInstance();
 
     static Book createBook() throws Exception {
         Scanner read = new Scanner(System.in);

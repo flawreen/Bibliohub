@@ -1,10 +1,13 @@
 package org.bibliohub.service;
 
+import org.bibliohub.config.AppDb;
 import org.bibliohub.factory.BookFactory;
 import org.bibliohub.model.Book;
 
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class BookService implements BookFactory {
@@ -12,13 +15,15 @@ public class BookService implements BookFactory {
     private static BookService instance;
     private static final LibraryService libraryService = LibraryService.getInstance();
 
-    private BookService() {
+    private Connection db;
+    private BookService(Connection connection) {
         this.books = new ArrayList<>();
+        this.db = connection;
     }
 
-    public static BookService getInstance() {
+    public static BookService getInstance() throws SQLException {
         if (instance == null) {
-            instance = new BookService();
+            instance = new BookService(AppDb.getAppDb());
         }
         return instance;
     }

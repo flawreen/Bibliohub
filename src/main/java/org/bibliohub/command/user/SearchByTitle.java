@@ -1,9 +1,9 @@
 package org.bibliohub.command.user;
 
 
-public class SearchByTitleCommand extends UserCommand {
+public class SearchByTitle extends User {
     private String title;
-    public SearchByTitleCommand(String title) {
+    public SearchByTitle(String title) {
         this.title = title;
     }
 

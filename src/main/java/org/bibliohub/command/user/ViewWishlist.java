@@ -1,10 +1,8 @@
 package org.bibliohub.command.user;
 
 
-import org.bibliohub.model.User;
-
-public class ViewWishlistCommand extends UserCommand {
-    public ViewWishlistCommand(User user) {
+public class ViewWishlist extends User {
+    public ViewWishlist(org.bibliohub.model.User user) {
         super(user);
     }
 

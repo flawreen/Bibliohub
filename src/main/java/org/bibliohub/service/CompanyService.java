@@ -1,10 +1,13 @@
 package org.bibliohub.service;
 
+import org.bibliohub.config.AppDb;
 import org.bibliohub.model.Book;
 import org.bibliohub.model.Company;
 import org.bibliohub.model.Shelf;
 import org.bibliohub.model.User;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,17 +16,20 @@ public class CompanyService {
     private ArrayList<Company> companies;
     private static final UserService userService = UserService.getInstance();
 
-    private CompanyService() {
-        this.companies = new ArrayList<>();
-    }
 
     public void setCompanies(ArrayList<Company> companies) {
         this.companies = companies;
     }
 
-    public static CompanyService getInstance() {
+    private Connection db;
+    private CompanyService(Connection connection) {
+        this.companies = new ArrayList<>();
+        this.db = connection;
+    }
+
+    public static CompanyService getInstance() throws SQLException {
         if (instance == null) {
-            instance = new CompanyService();
+            instance = new CompanyService(AppDb.getAppDb());
         }
         return instance;
     }

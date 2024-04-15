@@ -1,8 +1,8 @@
 package org.bibliohub.command.user;
 
-public class AddUserCommand extends UserCommand {
+public class AddUser extends User {
     private String password;
-    public AddUserCommand(String password) {
+    public AddUser(String password) {
         this.password = password;
     }
 

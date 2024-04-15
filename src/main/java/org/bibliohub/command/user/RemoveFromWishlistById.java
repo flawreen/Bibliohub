@@ -1,10 +1,8 @@
 package org.bibliohub.command.user;
 
-import org.bibliohub.model.User;
-
-public class RemoveFromWishlistByIdCommand extends UserCommand {
+public class RemoveFromWishlistById extends User {
     private long bookId;
-    public RemoveFromWishlistByIdCommand(User user, long bookId) {
+    public RemoveFromWishlistById(org.bibliohub.model.User user, long bookId) {
         super(user);
         this.bookId = bookId;
     }

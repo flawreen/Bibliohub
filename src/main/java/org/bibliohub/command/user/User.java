@@ -1,18 +1,17 @@
 package org.bibliohub.command.user;
 
 import org.bibliohub.interfaces.Command;
-import org.bibliohub.model.User;
 import org.bibliohub.service.UserService;
 
-public abstract class UserCommand implements Command {
-    protected User user;
+public abstract class User implements Command {
+    protected org.bibliohub.model.User user;
     protected static final UserService userService = UserService.getInstance();
 
-    UserCommand(User user) {
+    User(org.bibliohub.model.User user) {
         this.user = user;
     }
 
-    UserCommand() {
+    User() {
 
     }
 

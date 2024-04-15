@@ -1,7 +1,7 @@
 package org.bibliohub.command.user;
 
-public class PrintUsersCommand extends UserCommand {
-    public PrintUsersCommand() {
+public class PrintUsers extends User {
+    public PrintUsers() {
     }
 
     @Override

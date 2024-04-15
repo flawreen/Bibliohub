@@ -1,11 +1,9 @@
 package org.bibliohub.command.user;
 
-import org.bibliohub.model.User;
-
-public class ReturnBookCommand extends UserCommand {
+public class ReturnBook extends User {
     private long bookId;
 
-    public ReturnBookCommand(User user, long bookId) {
+    public ReturnBook(org.bibliohub.model.User user, long bookId) {
         super(user);
         this.bookId = bookId;
     }

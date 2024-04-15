@@ -1,9 +1,12 @@
 package org.bibliohub.service;
 
+import org.bibliohub.config.AppDb;
 import org.bibliohub.interfaces.PrintBookArray;
 import org.bibliohub.model.Book;
 import org.bibliohub.model.Library;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class LibraryService implements PrintBookArray {
@@ -11,13 +14,14 @@ public class LibraryService implements PrintBookArray {
     private static final BookService bookService = BookService.getInstance();
     private static LibraryService instance;
 
-    private LibraryService() {
-
+    private Connection db;
+    private LibraryService(Connection connection) {
+        this.db = connection;
     }
 
-    public static LibraryService getInstance() {
+    public static LibraryService getInstance() throws SQLException {
         if (instance == null) {
-            instance = new LibraryService();
+            instance = new LibraryService(AppDb.getAppDb());
         }
         return instance;
     }

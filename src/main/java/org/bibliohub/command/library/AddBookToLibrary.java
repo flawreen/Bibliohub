@@ -1,8 +1,8 @@
 package org.bibliohub.command.library;
 
-public class AddBookToLibraryCommand extends LibraryCommand {
+public class AddBookToLibrary extends Library {
     private String password;
-    public AddBookToLibraryCommand(String password) {
+    public AddBookToLibrary(String password) {
         this.password = password;
     }
 

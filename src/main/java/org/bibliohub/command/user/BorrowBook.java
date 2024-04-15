@@ -1,11 +1,9 @@
 package org.bibliohub.command.user;
 
-import org.bibliohub.model.User;
-
-public class BorrowBookCommand extends UserCommand {
+public class BorrowBook extends User {
     private long bookId;
 
-    public BorrowBookCommand(User user, long bookId) {
+    public BorrowBook(org.bibliohub.model.User user, long bookId) {
         super(user);
         this.bookId = bookId;
     }

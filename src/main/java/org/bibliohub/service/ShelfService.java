@@ -1,23 +1,36 @@
 package org.bibliohub.service;
 
+import org.bibliohub.config.AppDb;
 import org.bibliohub.model.Book;
 import org.bibliohub.model.Shelf;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ShelfService {
     private ArrayList<Shelf> shelves;
     private static ShelfService instance;
 
-    private static final BookService bookService = BookService.getInstance();
+    private static final BookService bookService;
 
-    private ShelfService() {
-        this.shelves = new ArrayList<>();
+    static {
+        try {
+            bookService = BookService.getInstance();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public static ShelfService getInstance() {
+    private Connection db;
+    private ShelfService(Connection connection) {
+        this.shelves = new ArrayList<>();
+        this.db = connection;
+    }
+
+    public static ShelfService getInstance() throws SQLException {
         if (instance == null) {
-            instance = new ShelfService();
+            instance = new ShelfService(AppDb.getAppDb());
         }
         return instance;
     }

@@ -1,8 +1,11 @@
 package org.bibliohub.service;
 
+import org.bibliohub.config.AppDb;
 import org.bibliohub.model.Book;
 import org.bibliohub.model.Wishlist;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class WishlistService {
@@ -11,13 +14,15 @@ public class WishlistService {
     private static WishlistService instance;
     private static final BookService bookService = BookService.getInstance();
 
-    private WishlistService() {
+    private Connection db;
+    private WishlistService(Connection connection) {
         this.wishlists = new ArrayList<>();
+        this.db = connection;
     }
 
-    public static WishlistService getInstance() {
+    public static WishlistService getInstance() throws SQLException {
         if (instance == null) {
-            instance = new WishlistService();
+            instance = new WishlistService(AppDb.getAppDb());
         }
         return instance;
     }

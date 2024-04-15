@@ -1,10 +1,10 @@
 package org.bibliohub.command.company;
 
-public class DeleteCompanyByIdCommand extends CompanyCommand {
+public class DeleteCompanyById extends Company {
     private String password;
     private long id;
 
-    public DeleteCompanyByIdCommand(String password, long id) {
+    public DeleteCompanyById(String password, long id) {
         this.password = password;
         this.id = id;
     }

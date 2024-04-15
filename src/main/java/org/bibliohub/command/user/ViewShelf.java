@@ -1,9 +1,7 @@
 package org.bibliohub.command.user;
 
-import org.bibliohub.model.User;
-
-public class ViewShelfCommand extends UserCommand {
-    public ViewShelfCommand(User user) {
+public class ViewShelf extends User {
+    public ViewShelf(org.bibliohub.model.User user) {
         super(user);
     }
 

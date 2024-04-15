@@ -1,8 +1,8 @@
 package org.bibliohub.command.user;
 
-public class ViewAvailableBooksCommand extends UserCommand {
+public class ViewAvailableBooks extends User {
 
-    public ViewAvailableBooksCommand() {
+    public ViewAvailableBooks() {
     }
 
     @Override
