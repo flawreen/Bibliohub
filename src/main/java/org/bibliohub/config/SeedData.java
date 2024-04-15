@@ -3,16 +3,30 @@ package org.bibliohub.config;
 import org.bibliohub.model.*;
 import org.bibliohub.service.*;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SeedData {
-    private final BookService bookService = BookService.getInstance();
-    private final CompanyService companyService = CompanyService.getInstance();
-    private final WishlistService wishlistService = WishlistService.getInstance();
-    private final ShelfService shelfService = ShelfService.getInstance();
-    private final LibraryService libraryService = LibraryService.getInstance();
-    private final UserService userService = UserService.getInstance();
+    private static final UserService userService;
+    private static final LibraryService libraryService;
+    private static final ShelfService shelfService;
+    private static final WishlistService wishlistService;
+    private static final BookService bookService;
+    private static final CompanyService companyService;
+
+    static {
+        try {
+            libraryService = LibraryService.getInstance();
+            shelfService = ShelfService.getInstance();
+            wishlistService = WishlistService.getInstance();
+            bookService = BookService.getInstance();
+            companyService = CompanyService.getInstance();
+            userService = UserService.getInstance();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public void seedData() {
         seedBooksAndLibrary();

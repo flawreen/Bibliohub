@@ -13,7 +13,15 @@ import java.util.ArrayList;
 public class BookService implements BookFactory {
     private ArrayList<Book> books;
     private static BookService instance;
-    private static final LibraryService libraryService = LibraryService.getInstance();
+    private static final LibraryService libraryService;
+
+    static {
+        try {
+            libraryService = LibraryService.getInstance();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     private Connection db;
     private BookService(Connection connection) {

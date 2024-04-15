@@ -12,7 +12,15 @@ public class WishlistService {
 
     private ArrayList<Wishlist> wishlists;
     private static WishlistService instance;
-    private static final BookService bookService = BookService.getInstance();
+    private static final BookService bookService;
+
+    static {
+        try {
+            bookService = BookService.getInstance();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     private Connection db;
     private WishlistService(Connection connection) {

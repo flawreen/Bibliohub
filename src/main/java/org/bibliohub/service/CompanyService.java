@@ -14,7 +14,15 @@ import java.util.Scanner;
 public class CompanyService {
     private static CompanyService instance;
     private ArrayList<Company> companies;
-    private static final UserService userService = UserService.getInstance();
+    private static final UserService userService;
+
+    static {
+        try {
+            userService = UserService.getInstance();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
     public void setCompanies(ArrayList<Company> companies) {

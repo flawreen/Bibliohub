@@ -11,7 +11,16 @@ import java.util.ArrayList;
 
 public class LibraryService implements PrintBookArray {
     private static final Library libraryInstance = Library.getInstance();
-    private static final BookService bookService = BookService.getInstance();
+    private static final BookService bookService;
+
+    static {
+        try {
+            bookService = BookService.getInstance();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private static LibraryService instance;
 
     private Connection db;

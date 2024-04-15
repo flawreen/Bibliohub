@@ -13,12 +13,23 @@ import java.util.Scanner;
 
 public class UserService implements PrintBookArray {
     private ArrayList<User> users;
-    private static final LibraryService libraryService = LibraryService.getInstance();
-    private static final ShelfService shelfService = ShelfService.getInstance();
-    private static final WishlistService wishlistService = WishlistService.getInstance();
-    private static final BookService bookService = BookService.getInstance();
+    private static final LibraryService libraryService;
+    private static final ShelfService shelfService;
+    private static final WishlistService wishlistService;
+    private static final BookService bookService;
+    private static final CompanyService companyService;
 
-    private static final CompanyService companyService = CompanyService.getInstance();
+    static {
+        try {
+            libraryService = LibraryService.getInstance();
+            shelfService = ShelfService.getInstance();
+            wishlistService = WishlistService.getInstance();
+            bookService = BookService.getInstance();
+            companyService = CompanyService.getInstance();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     private static UserService instance;
 
     private Connection db;
