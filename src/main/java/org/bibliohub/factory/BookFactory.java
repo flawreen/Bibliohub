@@ -3,12 +3,14 @@ package org.bibliohub.factory;
 import org.bibliohub.model.Book;
 import org.bibliohub.model.EBook;
 import org.bibliohub.model.PhysicalBook;
+import org.bibliohub.repository.BookRepository;
+import org.bibliohub.repository.UserRepository;
 import org.bibliohub.service.BookService;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public interface BookFactory {
-
     static Book createBook() throws Exception {
         Scanner read = new Scanner(System.in);
         long id = Book.getNextId();

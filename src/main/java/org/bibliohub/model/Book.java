@@ -3,7 +3,7 @@ package org.bibliohub.model;
 import java.util.ArrayList;
 
 public abstract class Book {
-    protected long id;
+    protected int id;
     protected String title;
     protected String author;
 
@@ -31,7 +31,7 @@ public abstract class Book {
         return nextId;
     }
 
-    public Book(long id, String title, String author, String isbn) {
+    public Book(int id, String title, String author, String isbn) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -39,7 +39,7 @@ public abstract class Book {
         nextId++;
     }
 
-    public Book(long id, String title, String author, String isbn, Shelf shelf, Wishlist wishlist) {
+    public Book(int id, String title, String author, String isbn, Shelf shelf, Wishlist wishlist) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -66,11 +66,11 @@ public abstract class Book {
         this.wishlist = wishlist;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

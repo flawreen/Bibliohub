@@ -14,7 +14,7 @@ public class PhysicalBook extends Book {
         this.coverType = coverType;
     }
 
-    public PhysicalBook(long id, String title, String author, String coverType, String isbn) {
+    public PhysicalBook(int id, String title, String author, String coverType, String isbn) {
         super(id, title, author, isbn);
         this.coverType = coverType;
     }

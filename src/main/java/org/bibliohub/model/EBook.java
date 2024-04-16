@@ -14,7 +14,7 @@ public class EBook extends Book {
         this.format = format;
     }
 
-    public EBook(long id, String title, String author, String isbn, String format) {
+    public EBook(int id, String title, String author, String isbn, String format) {
         super(id, title, author, isbn);
         this.format = format;
     }

@@ -53,8 +53,6 @@ public class UserService implements PrintBookArray {
         }
     }
 
-
-
     public User getUserById(long id) {
         try {
             int i = 0;

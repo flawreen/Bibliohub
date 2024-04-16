@@ -31,6 +31,14 @@ public class User {
         this.wishlistId = wishlistId;
     }
 
+    public User(long id, String name, long companyId, long shelfId, long wishlistId) {
+        this.id = id;
+        this.name = name;
+        this.companyId = companyId;
+        this.shelfId = shelfId;
+        this.wishlistId = wishlistId;
+    }
+
     public User(long id, String name, long companyId, long shelfId, long wishlistId, Company company) {
         this.id = id;
         this.name = name;
