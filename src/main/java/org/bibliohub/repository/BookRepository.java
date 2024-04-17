@@ -39,24 +39,25 @@ public class BookRepository extends Repository<Book> {
         return books;
     }
 
-    private ArrayList<Book> fetchResults(ResultSet books, String diffParam) throws SQLException {
+    static ArrayList<Book> fetchResults(ResultSet books) throws SQLException {
         ArrayList<Book> result = new ArrayList<>();
         while (books.next()) {
-            if (diffParam.equals("format")) {
+            var lastParamValue = books.getObject(books.getMetaData().getColumnCount());
+            if (lastParamValue.equals("pdf") || lastParamValue.equals("epub")) {
                 result.add(new EBook(
                         books.getInt("id"),
                         books.getString("title"),
                         books.getString("author"),
                         books.getString("isbn"),
-                        books.getString(diffParam))
+                        books.getString("format"))
                 );
-            } else if (diffParam.equals("cover")) {
+            } else if (lastParamValue.equals("hardcover") || lastParamValue.equals("paperback")) {
                 result.add(new PhysicalBook(
                         books.getInt("id"),
                         books.getString("title"),
                         books.getString("author"),
                         books.getString("isbn"),
-                        books.getString(diffParam))
+                        books.getString("cover"))
                 );
             }
         }
@@ -66,18 +67,18 @@ public class BookRepository extends Repository<Book> {
     public ArrayList<Book> getAllEBooks() throws SQLException {
         var ebookStatement = db.prepareStatement("SELECT * FROM books b JOIN ebooks eb ON b.id = eb.book_id");
         var result = ebookStatement.executeQuery();
-        return fetchResults(result, "format");
+        return fetchResults(result);
     }
 
     public ArrayList<Book> getAllPhysicalBooks() throws SQLException {
         var physicalBookStatement = db.prepareStatement("SELECT * FROM books b JOIN physical_books pb ON b.id = pb.book_id");
         var result = physicalBookStatement.executeQuery();
-        return fetchResults(result, "cover");
+        return fetchResults(result);
     }
 
     private PreparedStatement getFindStatement(String tableName) throws SQLException {
         StringBuilder query = new StringBuilder();
-        query.append("SELECT * FROM books b JOIN ").append(tableName).append("eb ON b.id = eb.id WHERE b.book_id = ?");
+        query.append("SELECT * FROM books b JOIN ").append(tableName).append(" eb ON b.id = eb.id WHERE b.book_id = ?");
         return db.prepareStatement(query.toString());
     }
 
