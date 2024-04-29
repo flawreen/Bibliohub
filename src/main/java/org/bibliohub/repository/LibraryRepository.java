@@ -25,9 +25,13 @@ public class LibraryRepository extends Repository<Library> {
     }
 
     private String selectAll = "SELECT * FROM books b JOIN library l ON b.library_id = l.id WHERE id = 1";
+
+    // Edit este folosit pentru insert si delete. Delete => id = null, Insert => id != null
     private String edit = "UPDATE books SET library_id = ? WHERE ID = ?";
     private String search = "SELECT * FROM books b JOIN library l ON b.library_id = l.id WHERE id = 1 AND lower(b.title) LIKE '%' || ? || '%' ";
 
+
+    // Nu am getAll si findById pentru ca exista doar o linie in tabelul Library
     @Override
     public ArrayList<Library> getAll() throws SQLException {
         return null;
