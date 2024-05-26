@@ -27,6 +27,7 @@ public class BookRepository extends Repository<Book> {
     private String insert = "INSERT INTO books VALUES (DEFAULT, ?, ?, ?)";
     private String deleteEBook = "DELETE FROM ebooks WHERE book_id = ?";
     private String deletePhysicalBook = "DELETE FROM physical_books WHERE book_id = ?";
+    private String deleteBook = "DELETE FROM books WHERE id = ?";
     private String edit = "UPDATE books SET title = ?, author = ?, isbn = ? WHERE ID = ?";
 
     @Override
@@ -78,7 +79,7 @@ public class BookRepository extends Repository<Book> {
 
     private PreparedStatement getFindStatement(String tableName) throws SQLException {
         StringBuilder query = new StringBuilder();
-        query.append("SELECT * FROM books b JOIN ").append(tableName).append(" eb ON b.id = eb.id WHERE b.book_id = ?");
+        query.append("SELECT * FROM books b JOIN ").append(tableName).append(" eb ON b.id = eb.book_id WHERE b.id = ?");
         return db.prepareStatement(query.toString());
     }
 
@@ -86,7 +87,7 @@ public class BookRepository extends Repository<Book> {
     public Book findById(int id) throws SQLException {
         var findEBook = getFindStatement("ebooks");
         findEBook.setInt(1, id);
-        var books = findByIdStatement.executeQuery();
+        var books = findEBook.executeQuery();
         if (books.next()) {
             return new EBook(
                     books.getInt("id"),
@@ -126,26 +127,21 @@ public class BookRepository extends Repository<Book> {
 
         if (diffParam.equals("format")) {
             var ebookStatement = db.prepareStatement("INSERT INTO ebooks VALUES (DEFAULT, ?, ?)");
-            ebookStatement.setString(1, diffValue);
-            ebookStatement.setInt(2, fkId);
+            ebookStatement.setString(2, diffValue);
+            ebookStatement.setInt(1, fkId);
+            ebookStatement.executeUpdate();
         } else if (diffParam.equals("cover")) {
             var physicalBookStatement = db.prepareStatement("INSERT INTO physical_books VALUES (DEFAULT, ?, ?)");
-            physicalBookStatement.setString(1, diffValue);
-            physicalBookStatement.setInt(2, fkId);
+            physicalBookStatement.setString(2, diffValue);
+            physicalBookStatement.setInt(1, fkId);
+            physicalBookStatement.executeUpdate();
         }
     }
 
     public void deleteById(int id) throws SQLException {
-        var book = findById(id);
-        if (book != null) {
-            var deleteStatement = db.prepareStatement(deleteEBook);
-            deleteStatement.setInt(1, book.getId());
-            deleteStatement.executeUpdate();
-
-            deleteStatement = db.prepareStatement(deletePhysicalBook);
-            deleteStatement.setInt(1, book.getId());
-            deleteStatement.executeUpdate();
-        }
+        var deleteStatement = db.prepareStatement(deleteBook);
+        deleteStatement.setInt(1, id);
+        deleteStatement.executeUpdate();
     }
 
     public void editById(int id, String title, String author, String isbn) throws SQLException {

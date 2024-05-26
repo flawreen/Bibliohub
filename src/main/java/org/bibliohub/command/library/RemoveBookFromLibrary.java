@@ -1,5 +1,7 @@
 package org.bibliohub.command.library;
 
+import java.sql.SQLException;
+
 public class RemoveBookFromLibrary extends Library {
     private String password;
     private long id;
@@ -10,7 +12,7 @@ public class RemoveBookFromLibrary extends Library {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws SQLException {
         libraryService.removeBookById(id, password);
     }
 

@@ -1,5 +1,7 @@
 package org.bibliohub.command.company;
 
+import java.sql.SQLException;
+
 public class DeleteCompanyById extends Company {
     private String password;
     private long id;
@@ -10,7 +12,7 @@ public class DeleteCompanyById extends Company {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws SQLException {
         companyService.deleteCompany(id, password);
     }
 

@@ -1,8 +1,10 @@
 package org.bibliohub.service;
 
 import org.bibliohub.config.AppDb;
+import org.bibliohub.interfaces.PrintBookArray;
 import org.bibliohub.model.Book;
 import org.bibliohub.model.Shelf;
+import org.bibliohub.repository.ShelfRepository;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -10,6 +12,17 @@ import java.util.ArrayList;
 
 public class ShelfService {
     private ArrayList<Shelf> shelves;
+
+    private static final ShelfRepository shelfRepository;
+
+    static {
+        try {
+            shelfRepository = ShelfRepository.getInstance("shelves");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private static ShelfService instance;
 
     private static final BookService bookService;
@@ -35,38 +48,28 @@ public class ShelfService {
         return instance;
     }
 
-    public int addShelf(long userId) {
-        shelves.add(new Shelf(shelves.size(), userId));
-        return shelves.size()-1;
+    public int addShelf() throws SQLException {
+        return shelfRepository.insert();
     }
 
-    public Shelf getShelfById(long id) {
-        try {
-            int i = 0;
-            while (shelves.get(i).getId() != id) {
-                i++;
-            }
-            return shelves.get(i);
-        } catch (IndexOutOfBoundsException e) {
-            return null;
-        }
+    public Shelf getShelfById(long id) throws SQLException {
+        return shelfRepository.findById((int)id);
     }
 
     public void addToShelf(long id, Book book) {
         try {
-            getShelfById(id).getBookList().add(book);
-            bookService.getBookById(book.getId()).setShelf(getShelfById(id));
-        } catch (NullPointerException e) {
+            shelfRepository.insertBook(book.getId(), (int) id);
+        } catch (NullPointerException | SQLException e) {
             System.out.println("Could not add book to shelf with id " + id + " not found.\n");
         }
     }
 
-    public void removeFromShelf(long id, Book book) {
-        try {
-            getShelfById((int) id).getBookList().remove(book);
-        } catch (NullPointerException e) {
-            System.out.println("Shelf with id " + id + " not found.\n");
-        }
+    public void removeFromShelf(Book book) throws SQLException {
+        shelfRepository.deleteBookById(book.getId());
+    }
+
+    public String printShelf(long id) throws SQLException {
+        return PrintBookArray.printBooks(shelfRepository.getBooks((int) id));
     }
 
 }

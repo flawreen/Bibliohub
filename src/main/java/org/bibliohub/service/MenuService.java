@@ -5,7 +5,6 @@ import org.bibliohub.command.book.DeleteBookById;
 import org.bibliohub.command.book.MakeBookAvailable;
 import org.bibliohub.command.company.AddCompany;
 import org.bibliohub.command.company.DeleteCompanyById;
-import org.bibliohub.command.library.AddBookToLibrary;
 import org.bibliohub.command.library.RemoveBookFromLibrary;
 import org.bibliohub.command.user.*;
 import org.bibliohub.interfaces.Command;
@@ -45,22 +44,22 @@ public class MenuService {
     private static final Scanner scanner = new Scanner(System.in);
     private static MenuService instance;
 
-    private MenuService() {
+    private MenuService() throws SQLException {
         chooseUser();
     }
 
-    public static MenuService getInstance() {
+    public static MenuService getInstance() throws SQLException {
         if (instance == null) {
             instance = new MenuService();
         }
         return instance;
     }
 
-    private void executeCommand(Command command) {
+    private void executeCommand(Command command) throws SQLException {
         command.execute();
     }
 
-    public void chooseUser() {
+    public void chooseUser() throws SQLException {
         executeCommand(new PrintUsers());
         int id = waitForOption();
         user = userService.getUserById(id);
@@ -83,8 +82,8 @@ public class MenuService {
                 9./10. Add/Delete user
                 11./12. Add/Delete book
                 13./14. Add/Delete company
-                15./16. Add/Delete book to/from library
-                17. Make book available in library
+                15. Remove book from library
+                16. Make book available in library
                 0. Exit""");
         System.out.print("> ");
     }
@@ -111,7 +110,7 @@ public class MenuService {
         return waitForString();
     }
 
-    public void chooseOption(int option) {
+    public void chooseOption(int option) throws SQLException {
         long id;
         String str;
         switch (option) {
@@ -174,12 +173,9 @@ public class MenuService {
                 }
                 break;
             case 15:
-                executeCommand(new AddBookToLibrary(readPassword()));
-                break;
-            case 16:
                 executeCommand(new RemoveBookFromLibrary(readPassword(), readBookId()));
                 break;
-            case 17:
+            case 16:
                 executeCommand(new MakeBookAvailable(readPassword(), readBookId()));
                 break;
             default:

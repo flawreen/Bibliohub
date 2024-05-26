@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public interface BookFactory {
-    static Book createBook() throws Exception {
+    static void createBook(BookRepository bookRepository) throws Exception {
         Scanner read = new Scanner(System.in);
         long id = Book.getNextId();
 
@@ -33,10 +33,9 @@ public interface BookFactory {
             int option = read.nextInt();
 
             if (option == 1) format.append("pdf");
-            else if (option == 2) format.append("epub");
-            else throw new Exception("Failed to create book");
+            else format.append("epub");
 
-            return new EBook(id, title, author, isbn, format.toString());
+            bookRepository.insert(title, author, isbn, "format", format.toString());
 
         } else if (type == 1) {
             System.out.println("Book cover type:\n1. hardcover 2. paperback");
@@ -44,13 +43,10 @@ public interface BookFactory {
             int option = read.nextInt();
 
             if (option == 1) cover.append("hardcover");
-            else if (option == 2) cover.append("paperback");
-            else throw new Exception("Failed to create book");
+            else  cover.append("paperback");
 
-            return new PhysicalBook(id, title, author, isbn, cover.toString());
+            bookRepository.insert(title, author, isbn, "cover", cover.toString());
 
         }
-
-        throw new Exception("Failed to create book");
     }
 }

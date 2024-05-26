@@ -1,5 +1,7 @@
 package org.bibliohub.command.user;
 
+import java.sql.SQLException;
+
 public class AddUser extends User {
     private String password;
     public AddUser(String password) {
@@ -7,7 +9,7 @@ public class AddUser extends User {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws SQLException {
         userService.addUser(password);
     }
 }

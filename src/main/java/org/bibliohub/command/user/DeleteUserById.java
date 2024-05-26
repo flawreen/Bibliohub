@@ -1,5 +1,7 @@
 package org.bibliohub.command.user;
 
+import java.sql.SQLException;
+
 public class DeleteUserById extends User {
     private String password;
     private long id;
@@ -9,7 +11,7 @@ public class DeleteUserById extends User {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws SQLException {
         userService.deleteUser(password, id);
     }
 

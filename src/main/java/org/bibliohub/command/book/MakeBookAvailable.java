@@ -1,6 +1,8 @@
 package org.bibliohub.command.book;
 
 
+import java.sql.SQLException;
+
 public class MakeBookAvailable extends Book {
     private String password;
     private long id;
@@ -11,7 +13,7 @@ public class MakeBookAvailable extends Book {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws SQLException {
         bookService.makeBookAvailable(id, password);
     }
 

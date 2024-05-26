@@ -23,6 +23,10 @@ public class Shelf implements PrintBookArray {
         this.bookList = bookList;
     }
 
+    public Shelf(long id) {
+        this.id = id;
+    }
+
     public long getId() {
         return id;
     }
@@ -39,16 +43,8 @@ public class Shelf implements PrintBookArray {
         this.userId = userId;
     }
 
-    public ArrayList<Book> getBookList() {
-        return bookList;
-    }
-
     public void setBookList(ArrayList<Book> bookList) {
         this.bookList = bookList;
     }
 
-    @Override
-    public String toString() {
-        return PrintBookArray.printBooks(getBookList());
-    }
 }

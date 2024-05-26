@@ -1,5 +1,7 @@
 package org.bibliohub.command.company;
 
+import java.sql.SQLException;
+
 public class AddCompany extends Company {
     private String password;
 
@@ -8,7 +10,7 @@ public class AddCompany extends Company {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws SQLException {
         companyService.addCompany(password);
     }
 

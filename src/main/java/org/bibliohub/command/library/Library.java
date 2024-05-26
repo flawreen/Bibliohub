@@ -20,7 +20,7 @@ public abstract class Library implements Command {
 
     }
 
-    public abstract void execute();
+    public abstract void execute() throws SQLException;
 
 
 }

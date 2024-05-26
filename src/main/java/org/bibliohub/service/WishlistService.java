@@ -1,8 +1,11 @@
 package org.bibliohub.service;
 
 import org.bibliohub.config.AppDb;
+import org.bibliohub.interfaces.PrintBookArray;
 import org.bibliohub.model.Book;
 import org.bibliohub.model.Wishlist;
+import org.bibliohub.repository.BookRepository;
+import org.bibliohub.repository.WishlistRepository;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -11,6 +14,26 @@ import java.util.ArrayList;
 public class WishlistService {
 
     private ArrayList<Wishlist> wishlists;
+
+    private static final WishlistRepository wishlistRepository;
+    private static final BookRepository bookRepository;
+
+    static {
+        try {
+            bookRepository = BookRepository.getInstance("books");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    static {
+        try {
+            wishlistRepository = WishlistRepository.getInstance("wishlists");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private static WishlistService instance;
     private static final BookService bookService;
 
@@ -35,31 +58,17 @@ public class WishlistService {
         return instance;
     }
 
-    public int addWishlist(long userId) {
-        wishlists.add(new Wishlist(wishlists.size(), userId));
-        return wishlists.size()-1;
+    public int addWishlist() throws SQLException {
+        return wishlistRepository.insert();
     }
 
-    public Wishlist getWishlistById(long id) {
-        try {
-            int i = 0;
-            while (wishlists.get(i).getId() != id) {
-                i++;
-            }
-            return wishlists.get(i);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            return null;
-        }
+    public Wishlist getWishlistById(long id) throws SQLException {
+        return wishlistRepository.findById((int) id);
     }
 
     public void addBook(long id, Book book) {
         try {
-            var wishlist = getWishlistById(id);
-            if (wishlist.getWishlistBooks().indexOf(book) != -1) {
-                throw new Exception("Book already wishlisted");
-            }
-            wishlist.getWishlistBooks().add(book);
-            bookService.getBookById(book.getId()).setWishlist(getWishlistById(id));
+            wishlistRepository.insertBook((int) id, book.getId());
         } catch (NullPointerException e) {
             System.out.println("Wishlist with id " + id + " not found");
         } catch (Exception e) {
@@ -67,13 +76,12 @@ public class WishlistService {
         }
     }
 
-    public void removeBook(long id, Book book) {
-        try {
-            getWishlistById(id).getWishlistBooks().remove(book);
-        } catch (NullPointerException e) {
-            System.out.println("Wishlist with id " + id + " not found");
-        }
+    public void removeBook(long id, Book book) throws SQLException {
+        wishlistRepository.deleteBookById(book.getId());
     }
 
+    public String printWishlist(long id) throws SQLException {
+        return PrintBookArray.printBooks(wishlistRepository.getBooks((int) id));
+    }
 
 }

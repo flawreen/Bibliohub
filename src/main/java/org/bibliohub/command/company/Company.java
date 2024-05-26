@@ -20,5 +20,5 @@ public abstract class Company implements Command {
 
     }
 
-    public abstract void execute();
+    public abstract void execute() throws SQLException;
 }

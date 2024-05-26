@@ -1,12 +1,36 @@
 package org.bibliohub.repository;
 
 import org.bibliohub.model.User;
+import org.bibliohub.model.Wishlist;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 
 public class UserRepository extends Repository<User> {
     private static UserRepository instance;
+    private static CompanyRepository companyRepository;
+    private static ShelfRepository shelfRepository;
+    private static WishlistRepository wishlistRepository;
+
+    static {
+        try {
+            shelfRepository = ShelfRepository.getInstance("shelves");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            wishlistRepository = WishlistRepository.getInstance("wishlists");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            companyRepository = CompanyRepository.getInstance("companies");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private UserRepository(String tableName) throws SQLException {
         super(tableName);
     }
@@ -18,9 +42,9 @@ public class UserRepository extends Repository<User> {
         return instance;
     }
 
-    private String insert = "INSERT INTO users VALUES (DEFAULT, ?, ?, ?, ?, ?)";
+    private String insert = "INSERT INTO users VALUES (DEFAULT, ?, ?, ?, ?)";
     private String delete = "DELETE FROM users WHERE ID = ?";
-    private String edit = "UPDATE users SET name = ?, companyId = ?, shelfId = ?, wishlistId = ? WHERE ID = ?";
+    private String edit = "UPDATE users SET name = ?, company_id = ?, shelf_id = ?, wishlist_id = ? WHERE ID = ?";
 
     @Override
     public ArrayList<User> getAll() throws SQLException {
@@ -30,10 +54,11 @@ public class UserRepository extends Repository<User> {
             users.add(new User(
                     result.getInt("id"),
                     result.getString("name"),
-                    result.getInt("companyId"),
-                    result.getInt("shelfId"),
-                    result.getInt("wishlistId"))
+                    result.getInt("company_id"),
+                    result.getInt("shelf_id"),
+                    result.getInt("wishlist_id"))
             );
+            users.getLast().setCompany(companyRepository.findById(result.getInt("company_id")));
         }
         return users;
     }
@@ -43,13 +68,15 @@ public class UserRepository extends Repository<User> {
         findByIdStatement.setInt(1, id);
         var result = findByIdStatement.executeQuery();
         if (result.next()) {
-            return new User(
+            User user = new User(
                     result.getInt("id"),
                     result.getString("name"),
-                    result.getInt("companyId"),
-                    result.getInt("shelfId"),
-                    result.getInt("wishlistId")
+                    result.getInt("company_id"),
+                    result.getInt("shelf_id"),
+                    result.getInt("wishlist_id")
             );
+            user.setCompany(companyRepository.findById(result.getInt("company_id")));
+            return user;
         } else return null;
     }
 

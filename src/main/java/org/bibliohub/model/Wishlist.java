@@ -9,6 +9,10 @@ public class Wishlist implements PrintBookArray {
     private long userId;
     private ArrayList<Book> wishlistBooks;
 
+    public Wishlist(long id) {
+        this.id=id;
+    }
+
     public long getId() {
         return id;
     }
